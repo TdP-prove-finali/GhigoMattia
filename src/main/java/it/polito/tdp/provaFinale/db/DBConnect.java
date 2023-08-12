@@ -6,7 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DBConnect {
 
-	private static final String jdbcURL = "jdbc:mariadb://localhost/provafinale?serverTimezone=UTC";
+	private static final String jdbcURL = "jdbc:mariadb://localhost/ProvaFinale";
 	private static HikariDataSource ds;
 
 	public static Connection getConnection() {
