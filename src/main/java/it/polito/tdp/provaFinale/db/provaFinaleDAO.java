@@ -15,9 +15,10 @@ import it.polito.tdp.provaFinale.model.Teatro;
 import it.polito.tdp.provaFinale.model.Toretto;
 
 public class provaFinaleDAO {
+	
 	public List<Albergo> readAlberghi() {
 
-		final String sql = "SELECT a.ID, a.Denominazione, a.Indirizzo, a.Mezza_pensione_alta_stagione, a.Stelle, a.Cap, a.Comune, a.Provincia, a.Latitudine, a.Longitudine, a.Telefono, a.Email, a.Www, a.Bike_friendly, a.Lingue, a.Disabili, a.Animali_domestici "
+		final String sql = "SELECT a.ID, a.Denominazione, a.Indirizzo, a.Mezza_pensione_alta_stagione, a.Stelle, a.Cap, a.Comune, a.Provincia, a.Latitudine, a.Longitudine, a.Bike_friendly, a.Lingue, a.Disabili, a.Animali_domestici "
 				+ "FROM alberghi a";
 		List<Albergo> alberghi = new ArrayList<Albergo>();
 
@@ -27,7 +28,7 @@ public class provaFinaleDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), new LatLng(rs.getDouble("a.Latitudine"), rs.getDouble("a.Longitudine")), rs.getString("a.Telefono"), rs.getString("a.Email"), rs.getString("a.Www"), rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"));
+				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), new LatLng(rs.getDouble("a.Latitudine"), rs.getDouble("a.Longitudine")), rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"));
 				alberghi.add(a);
 			}
 

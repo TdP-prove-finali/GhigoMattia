@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="496.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.provaProvaFinale.Controller">
+<BorderPane prefHeight="547.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.provaFinale.FXMLController">
    <center>
       <VBox prefHeight="431.0" prefWidth="589.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -27,13 +28,19 @@
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
                   <Label text="Alberghi" />
-                  <ComboBox prefWidth="150.0" promptText="Scegli un hotel..." />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" text="Imposta filtri" />
-                  <Button mnemonicParsing="false" text="Elimina filtri" />
+                  <ComboBox fx:id="cmbHotel" prefWidth="150.0" promptText="Scegli un hotel..." />
+                  <Button mnemonicParsing="false" onAction="#btnInvio" text="Invio" />
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
+            </HBox>
+            <Label fx:id="labelNumeroHotel" />
+            <HBox spacing="10.0">
+               <children>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnImpostaFiltriHotel" text="Imposta filtri" />
+                  <Button mnemonicParsing="false" onAction="#btnEliminaFiltriHotel" text="Elimina filtri" />
+               </children>
             </HBox>
             <GridPane alignment="CENTER_LEFT" hgap="5.0">
                <columnConstraints>
@@ -50,30 +57,31 @@
                </rowConstraints>
                <children>
                   <Label text="Prezzo max" />
-                  <Label text="Stelle" GridPane.columnIndex="1" />
+                  <Label text="Stelle min" GridPane.columnIndex="1" />
                   <Label text="Dist. centro max" GridPane.columnIndex="2" />
                   <Label text="Bici" GridPane.columnIndex="3" />
                   <Label text="Accesso disabili" GridPane.columnIndex="4" />
                   <Label text="Accesso animali" GridPane.columnIndex="5" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="checkBici" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="CheckDisabili" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="CheckAnimali" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbStelle" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbPrezzo" prefWidth="150.0" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbDistanza" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
+            <Separator />
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label disable="true" text="Luoghi" />
-                  <Button contentDisplay="CENTER" disable="true" mnemonicParsing="false" text="Imposta filtri" />
-                  <Button disable="true" mnemonicParsing="false" text="Elimina filtri" />
+                  <Label fx:id="labelLuoghi" disable="true" text="Luoghi" />
+                  <Button fx:id="btnImpostaFiltriLuoghi" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#handleBtnEliminaFiltriLuoghi" text="Imposta filtri" />
+                  <Button fx:id="btnEliminaFiltriLuoghi" disable="true" mnemonicParsing="false" onAction="#handleBtnEliminaFiltriLuoghi" text="Elimina filtri" />
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </HBox>
-            <GridPane disable="true" hgap="5.0">
+            <GridPane fx:id="gridFiltriLuoghi" disable="true" hgap="5.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -89,17 +97,18 @@
                   <Label text="Chiese" GridPane.columnIndex="1" />
                   <Label text="Musei" GridPane.columnIndex="2" />
                   <Label text="Teatri" GridPane.columnIndex="3" />
-                  <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbTempo" prefWidth="150.0" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbChiese" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbMusei" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbTeatri" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <TableView prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="N. tappa" />
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Nome" />
-                  <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Indirizzo" />
+                <TableColumn fx:id="tableTappa" editable="false" prefWidth="75.0" sortable="false" text="N. tappa" />
+                  <TableColumn fx:id="tableTipo" prefWidth="75.0" text="Tipo" />
+                <TableColumn fx:id="tableNome" editable="false" prefWidth="75.0" sortable="false" text="Nome" />
+                  <TableColumn fx:id="tableIndirizzo" editable="false" prefWidth="75.0" sortable="false" text="Indirizzo" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -110,12 +119,12 @@
             </TableView>
             <HBox alignment="CENTER_RIGHT" spacing="20.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#logoaperTO" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Screenshot_2023-08-04_013305-removebg-preview%20-%20Copia.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#logoILoveToret" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@logo_ilovetoret.png" />
                      </image>

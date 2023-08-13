@@ -15,16 +15,13 @@ public class Albergo implements Comparable<Albergo>{
 	private String comune;
 	private String provincia;
 	private LatLng coordinate;
-	private String telefono;
-	private String email;
-	private String sito;
 	private Boolean bici;
 	private String lingue;
 	private Boolean disabili;
 	private Boolean animali;
 	
 	public Albergo(Integer id, String nome, String indirizzo, Double prezzo, Integer stelle, Integer cap, String comune,
-			String provincia, LatLng coordinate, String telefono, String email, String sito, Integer bici,
+			String provincia, LatLng coordinate, Integer bici,
 			String lingue, Integer disabili, Integer animali) {
 		super();
 		this.id = id;
@@ -36,9 +33,6 @@ public class Albergo implements Comparable<Albergo>{
 		this.comune = comune;
 		this.provincia = provincia;
 		this.coordinate = coordinate;
-		this.telefono = telefono;
-		this.email = email;
-		this.sito = sito;
 		if(bici==1) {
 			this.bici=true;
 		}
@@ -131,30 +125,6 @@ public class Albergo implements Comparable<Albergo>{
 		this.coordinate = coordinate;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSito() {
-		return sito;
-	}
-
-	public void setSito(String sito) {
-		this.sito = sito;
-	}
-
 	public Boolean getBici() {
 		return bici;
 	}
@@ -187,10 +157,11 @@ public class Albergo implements Comparable<Albergo>{
 		this.animali = animali;
 	}
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(animali, bici, cap, comune, coordinate, disabili, email, id, indirizzo, lingue, nome,
-				prezzo, provincia, sito, stelle, telefono);
+		return Objects.hash(animali, bici, cap, comune, coordinate, disabili, id, indirizzo, lingue, nome, prezzo,
+				provincia, stelle);
 	}
 
 	@Override
@@ -205,11 +176,10 @@ public class Albergo implements Comparable<Albergo>{
 		return Objects.equals(animali, other.animali) && Objects.equals(bici, other.bici)
 				&& Objects.equals(cap, other.cap) && Objects.equals(comune, other.comune)
 				&& Objects.equals(coordinate, other.coordinate) && Objects.equals(disabili, other.disabili)
-				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(indirizzo, other.indirizzo) && Objects.equals(lingue, other.lingue)
-				&& Objects.equals(nome, other.nome) && Objects.equals(prezzo, other.prezzo)
-				&& Objects.equals(provincia, other.provincia) && Objects.equals(sito, other.sito)
-				&& Objects.equals(stelle, other.stelle) && Objects.equals(telefono, other.telefono);
+				&& Objects.equals(id, other.id) && Objects.equals(indirizzo, other.indirizzo)
+				&& Objects.equals(lingue, other.lingue) && Objects.equals(nome, other.nome)
+				&& Objects.equals(prezzo, other.prezzo) && Objects.equals(provincia, other.provincia)
+				&& Objects.equals(stelle, other.stelle);
 	}
 
 	@Override
