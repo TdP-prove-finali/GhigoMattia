@@ -11,11 +11,12 @@ public class TestModel {
 		List<Albergo> alberghi = new ArrayList<>(m.getAllAlberghi());
 		System.out.println(alberghi.size());
 		m.creaListaAlberghi(100000.0, 0, 1000000.0, false, false, false);
-//		m.setAlbergo(965);
+		Albergo a = m.getAlbergo(965);
+		m.setAlbergo(a);
+		System.out.println(a);
 		m.creaGrafo();
 //		m.creaItinerario(300.0, null, null, null);
 //		List<Luogo> itinerario = m.getItinerarioMigliore();
-//		System.out.println("\n"+m.getAlbergo());
 //		for(int i=0;i<itinerario.size();i++) {
 //			if(i==0) {
 ////				System.out.println(LatLngTool.distance(m.getAlbergo().getCoordinate(), itinerario.get(i).getCoordinate(), LengthUnit.KILOMETER)*60/4);

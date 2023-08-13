@@ -137,10 +137,10 @@ public class Model {
 	public void creaGrafo() {
 		grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
-//		Luogo inizio = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-//		Luogo fine = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-//		this.allLuoghi.add(inizio);
-//		this.allLuoghi.add(fine);
+		Luogo inizio = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		Luogo fine = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.allLuoghi.add(inizio);
+		this.allLuoghi.add(fine);
 		
 		Graphs.addAllVertices(this.grafo, this.allLuoghi);
 
@@ -166,6 +166,8 @@ public class Model {
 		System.out.println("Grafo creato con "+grafo.vertexSet().size()+ " vertici e "+grafo.edgeSet().size()+" archi");
 	}
 	
+	
+	
 	public List<Albergo> getAllAlberghi() {
 		this.allAlberghi.sort(null);
 		return allAlberghi;
@@ -174,6 +176,15 @@ public class Model {
 	public List<Albergo> getAlberghiFiltrati() {
 		this.alberghiFiltrati.sort(null);
 		return alberghiFiltrati;
+	}
+	
+	public Albergo getAlbergo(Integer i) {
+		for(Albergo a : this.allAlberghi) {
+			if(a.getId().compareTo(i)==0) {
+				return a;
+			}
+		}
+		return null;
 	}
 
 	public List<Luogo> getAllLuoghi() {
@@ -200,5 +211,12 @@ public class Model {
 		return allToretti;
 	}
 	
-	
+	public Luogo getLuogo(String nome) {
+		for(Luogo l : this.allLuoghi) {
+			if(l.getNome().compareTo(nome)==0) {
+				return l;
+			}
+		}
+		return null;
+	}
 }

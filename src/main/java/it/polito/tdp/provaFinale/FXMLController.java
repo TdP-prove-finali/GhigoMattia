@@ -18,6 +18,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -91,6 +92,9 @@ public class FXMLController {
     @FXML
     private Label labelNumeroHotel;
 
+    @FXML
+    private TextArea textArea;
+    
     @FXML
     void btnInvio(ActionEvent event) {
     	Albergo a = this.cmbHotel.getValue();
