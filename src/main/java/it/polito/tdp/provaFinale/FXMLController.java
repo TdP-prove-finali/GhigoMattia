@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import it.polito.tdp.provaFinale.model.Albergo;
-import it.polito.tdp.provaFinale.model.Luogo;
 import it.polito.tdp.provaFinale.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -73,18 +71,6 @@ public class FXMLController {
 
     @FXML
     private ComboBox<Integer> cmbTeatri;
-
-    @FXML
-    private TableColumn<Luogo, String> tableIndirizzo;
-
-    @FXML
-    private TableColumn<Luogo, String> tableNome;
-
-    @FXML
-    private TableColumn<?, Integer> tableTappa;
-
-    @FXML
-    private TableColumn<Luogo, String> tableTipo;
     
     @FXML
     private Label labelLuoghi;
@@ -114,10 +100,6 @@ public class FXMLController {
     	for(int i=1;i<=5;i++) {
     		this.cmbTeatri.getItems().add(i);
     	}
-    	this.tableTappa.getColumns().clear();
-    	this.tableTipo.getColumns().clear();
-    	this.tableNome.getColumns().clear();
-    	this.tableIndirizzo.getColumns().clear();
     	if(a!=null) {
     		this.labelLuoghi.setDisable(false);
     		this.btnImpostaFiltriLuoghi.setDisable(false);
@@ -221,10 +203,10 @@ public class FXMLController {
 	         try {
 	        	 URI uri = new URI("http://aperto.comune.torino.it/it/");
 	        	 desktop.browse(uri);
-	         } catch (IOException excp) {
-	            excp.printStackTrace();
-	         } catch (URISyntaxException excp) {
-	            excp.printStackTrace();
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         } catch (URISyntaxException e) {
+	            e.printStackTrace();
 	         }
 	      }
     }
@@ -253,10 +235,6 @@ public class FXMLController {
         assert cmbHotel != null : "fx:id=\"cmbHotel\" was not injected: check your FXML file 'provaFinale.fxml'.";
         assert cmbPrezzo != null : "fx:id=\"cmbPrezzo\" was not injected: check your FXML file 'provaFinale.fxml'.";
         assert cmbStelle != null : "fx:id=\"cmbStelle\" was not injected: check your FXML file 'provaFinale.fxml'.";
-        assert tableIndirizzo != null : "fx:id=\"tableIndirizzo\" was not injected: check your FXML file 'provaFinale.fxml'.";
-        assert tableNome != null : "fx:id=\"tableNome\" was not injected: check your FXML file 'provaFinale.fxml'.";
-        assert tableTappa != null : "fx:id=\"tableTappa\" was not injected: check your FXML file 'provaFinale.fxml'.";
-        assert tableTipo != null : "fx:id=\"tableTipo\" was not injected: check your FXML file 'provaFinale.fxml'.";
 
     }
 

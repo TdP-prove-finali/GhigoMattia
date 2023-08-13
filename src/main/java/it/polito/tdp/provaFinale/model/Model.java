@@ -139,8 +139,8 @@ public class Model {
 	public void creaGrafo() {
 		grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
-		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Partenza", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Arrivo", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
 		this.allLuoghi.add(partenza);
 		this.allLuoghi.add(arrivo);
 		
@@ -150,7 +150,7 @@ public class Model {
 			for(Luogo l2 : this.grafo.vertexSet()) {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
-					if((l1.getTipo().compareTo("Toret")==0 && l2.getTipo().compareTo("Toret")==0) || (l1.getTipo().compareTo("Locale storico")==0 && l2.getTipo().compareTo("Locale storico")==0) || (l1.getTipo().compareTo("Teatro")==0 && l2.getTipo().compareTo("Teatro")==0)) {
+					if(l1.getTipo().compareTo(l2.getTipo())==0)	{
 						controllo = true;
 					}
 					if(controllo==false) {
@@ -183,14 +183,14 @@ public class Model {
 				parziale.add(l);
 			}
 		}
-		ricorsione(parziale, this.getAdiacenti(parziale.get(0)), 0.0);
+		ricorsione(parziale, this.allLuoghi, 0.0, false, false);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont) {
-		System.out.println(adiacenti.size());
-
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean toretti, boolean locali) {
+		System.out.println(parziale.size());
+		
 		if(parziale.get(parziale.size()-1).getNome().compareTo("Arrivo: "+this.albergoScelto.getNome())==0) {
-			if(parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata)) {
+			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata)) && toretti==true) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}
@@ -199,19 +199,61 @@ public class Model {
 			
 		for(Luogo l : adiacenti) {
 			if(!parziale.contains(l)) {
-				DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
-				double successivo = 0.0;
-				double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
-				if(distanza<=1.5) {
-					successivo = distanza*60/4;
+				if(l.getTipo().compareTo("Toret")==0) {
+					if(toretti==false) {
+						DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+						double successivo = 0.0;
+						double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+						if(distanza<=1.5) {
+							successivo = distanza*60/4;
+						}
+						else {
+							successivo = distanza*60/20;
+						}
+						if((cont+this.grafo.getEdgeWeight(precedente)+l.getVisita()+successivo)<=this.tempoDisponibile){
+							parziale.add(l);
+							toretti=true;
+							ricorsione(parziale, this.getAdiacenti(l), cont+=(l.getVisita()+this.grafo.getEdgeWeight(precedente)), toretti, locali);
+							parziale.remove(l);
+							toretti=false;
+						}
+					}
+				}
+				else if(l.getTipo().compareTo("Locale storico")==0) {
+					if(locali==false) {
+						DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+						double successivo = 0.0;
+						double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+						if(distanza<=1.5) {
+							successivo = distanza*60/4;
+						}
+						else {
+							successivo = distanza*60/20;
+						}
+						if((cont+this.grafo.getEdgeWeight(precedente)+l.getVisita()+successivo)<=this.tempoDisponibile){
+							parziale.add(l);
+							locali=true;
+							ricorsione(parziale, this.getAdiacenti(l), cont+=(l.getVisita()+this.grafo.getEdgeWeight(precedente)), toretti, locali);
+							parziale.remove(l);
+							locali=false;
+						}
+					}
 				}
 				else {
-					successivo = distanza*60/20;
-				}
-				if((cont+this.grafo.getEdgeWeight(precedente)+l.getVisita()+successivo)<=this.tempoDisponibile){
-					parziale.add(l);
-					ricorsione(parziale, this.getAdiacenti(l), cont+=(l.getVisita()+this.grafo.getEdgeWeight(precedente)));
-					parziale.remove(l);
+					DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+					double successivo = 0.0;
+					double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+					if(distanza<=1.5) {
+						successivo = distanza*60/4;
+					}
+					else {
+						successivo = distanza*60/20;
+					}
+					if((cont+this.grafo.getEdgeWeight(precedente)+l.getVisita()+successivo)<=this.tempoDisponibile){
+						parziale.add(l);
+						ricorsione(parziale, this.getAdiacenti(l), cont+=(l.getVisita()+this.grafo.getEdgeWeight(precedente)), toretti, locali);
+						parziale.remove(l);
+					}
 				}
 			}
 		}
