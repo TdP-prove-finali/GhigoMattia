@@ -28,11 +28,13 @@ public class Model {
 	private LatLng centro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
 	private Albergo albergoScelto;
-	private Double tempoDisponibile;
-	private Integer stelleChiese;
-	private Integer stelleMusei;
-	private Integer stelleTeatri;
+	private double tempoDisponibile;
+	private int stelleChiese;
+	private int stelleMusei;
+	private int stelleTeatri;
 	
+	private Luogo partenza;
+	private Luogo arrivo;
 	private List<Luogo> itinerarioMigliore;
 	private double durata;
 	
@@ -69,7 +71,7 @@ public class Model {
 		}
 	}
 	
-	public void creaListaAlberghi(Double prezzo, Integer stelle, Double distanza, Boolean bici, Boolean disabili, Boolean animali) {
+	public void creaListaAlberghi(double prezzo, int stelle, double distanza, boolean bici, boolean disabili, boolean animali) {
 		this.alberghiFiltrati = new ArrayList<>();
 		if(bici==true && disabili==true && animali==true) {
 			for(Albergo a : this.allAlberghi) {
@@ -137,10 +139,10 @@ public class Model {
 	public void creaGrafo() {
 		grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
-		Luogo inizio = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		Luogo fine = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.allLuoghi.add(inizio);
-		this.allLuoghi.add(fine);
+		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Hotel", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.allLuoghi.add(partenza);
+		this.allLuoghi.add(arrivo);
 		
 		Graphs.addAllVertices(this.grafo, this.allLuoghi);
 
@@ -166,7 +168,72 @@ public class Model {
 		System.out.println("Grafo creato con "+grafo.vertexSet().size()+ " vertici e "+grafo.edgeSet().size()+" archi");
 	}
 	
+	public void creaItinerario(double tempoDisponibile, int stelleChiese, int stelleMusei, int stelleTeatri) {
+		this.tempoDisponibile = tempoDisponibile;
+		this.stelleChiese = stelleChiese;
+		this.stelleMusei = stelleMusei;
+		this.stelleTeatri = stelleTeatri;
+		
+		this.itinerarioMigliore = new ArrayList<>();
+		this.durata = Double.MAX_VALUE;
+		
+		List<Luogo> parziale = new ArrayList<>();
+		for(Luogo l : this.allLuoghi) {
+			if(l.getNome().compareTo("Partenza: "+this.albergoScelto.getNome())==0) {
+				parziale.add(l);
+			}
+		}
+		ricorsione(parziale, this.getAdiacenti(parziale.get(0)), 0.0);
+	}
 	
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont) {
+		System.out.println(adiacenti.size());
+
+		if(parziale.get(parziale.size()-1).getNome().compareTo("Arrivo: "+this.albergoScelto.getNome())==0) {
+			if(parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata)) {
+				this.itinerarioMigliore = new ArrayList<>(parziale);
+				this.durata = cont;
+			}
+			return;
+		}
+			
+		for(Luogo l : adiacenti) {
+			if(!parziale.contains(l)) {
+				DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+				double successivo = 0.0;
+				double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+				if(distanza<=1.5) {
+					successivo = distanza*60/4;
+				}
+				else {
+					successivo = distanza*60/20;
+				}
+				if((cont+this.grafo.getEdgeWeight(precedente)+l.getVisita()+successivo)<=this.tempoDisponibile){
+					parziale.add(l);
+					ricorsione(parziale, this.getAdiacenti(l), cont+=(l.getVisita()+this.grafo.getEdgeWeight(precedente)));
+					parziale.remove(l);
+				}
+			}
+		}
+	}
+
+	private List<Luogo> getAdiacenti(Luogo partenza) {
+		List<Luogo> adiacenti = new ArrayList<>(Graphs.successorListOf(this.grafo, partenza));
+		return adiacenti;
+	}
+	
+	public List<Luogo> getItinerarioMigliore() {
+		return itinerarioMigliore;
+	}
+	
+	public double getDurata() {
+		if(this.itinerarioMigliore.size()==0) {
+			return 0.0;
+		}
+		else {
+			return this.durata;
+		}
+	}
 	
 	public List<Albergo> getAllAlberghi() {
 		this.allAlberghi.sort(null);
