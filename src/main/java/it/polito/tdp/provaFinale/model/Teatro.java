@@ -10,9 +10,9 @@ public class Teatro {
 	private String tipo;
 	private String indirizzo;
 	private LatLng coordinate;
-	private Integer visita;
+	private int visita;
 	
-	public Teatro(String nome, String indirizzo, LatLng coordinate, Integer visita) {
+	public Teatro(String nome, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = "Teatro";
@@ -49,7 +49,7 @@ public class Teatro {
 		this.coordinate = coordinate;
 	}
 
-	public Integer getVisita() {
+	public int getVisita() {
 		return visita;
 	}
 

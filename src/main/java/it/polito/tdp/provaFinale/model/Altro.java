@@ -10,9 +10,9 @@ public class Altro {
 	private String tipo;
 	private String indirizzo;
 	private LatLng coordinate;
-	private Integer visita;
+	private int visita;
 	
-	public Altro(String nome, String tipo, String indirizzo, LatLng coordinate, Integer visita) {
+	public Altro(String nome, String tipo, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -49,7 +49,7 @@ public class Altro {
 		this.coordinate = coordinate;
 	}
 
-	public Integer getVisita() {
+	public int getVisita() {
 		return visita;
 	}
 

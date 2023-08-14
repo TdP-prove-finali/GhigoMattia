@@ -58,7 +58,7 @@
                   <Label text="Prezzo max" />
                   <Label text="Stelle min" GridPane.columnIndex="1" />
                   <Label text="Dist. centro max" GridPane.columnIndex="2" />
-                  <Label text="Bici" GridPane.columnIndex="3" />
+                  <Label text="Accesso bici" GridPane.columnIndex="3" />
                   <Label text="Accesso disabili" GridPane.columnIndex="4" />
                   <Label text="Accesso animali" GridPane.columnIndex="5" />
                   <CheckBox fx:id="checkBici" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />

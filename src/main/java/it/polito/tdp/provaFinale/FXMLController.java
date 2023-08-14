@@ -140,6 +140,7 @@ public class FXMLController {
     	}
     	model.creaListaAlberghi(prezzo, stelle, distanza, bici, disabili, animali);
     	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
+    	this.cmbHotel.getItems().addAll(alberghiFiltrati);
     	if(alberghiFiltrati.size()==0) {
         	this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
     	}
@@ -248,19 +249,20 @@ public class FXMLController {
     	for(int i=1;i<=5;i++) {
     		this.cmbStelle.getItems().add(i);
     	}
+    	this.cmbDistanza.getItems().add("0.5 km");
     	for(double i=1;i<=8;i++) {
     		this.cmbDistanza.getItems().add(i+" km");
     	}
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
-    	for(int i=1;i<=5;i++) {
+    	for(int i=1;i<=3;i++) {
     		this.cmbChiese.getItems().add(i);
     	}
-    	for(int i=1;i<=5;i++) {
+    	for(int i=1;i<=3;i++) {
     		this.cmbMusei.getItems().add(i);
     	}
-    	for(int i=1;i<=5;i++) {
+    	for(int i=1;i<=3;i++) {
     		this.cmbTeatri.getItems().add(i);
     	}
     }

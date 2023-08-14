@@ -6,27 +6,27 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class Toretto {
 
-	private Integer id;
+	private String nome;
 	private String tipo;
 	private String indirizzo;
 	private LatLng coordinate;
-	private Integer visita;
+	private int visita;
 	
-	public Toretto(Integer id, String indirizzo, LatLng coordinate, Integer visita) {
+	public Toretto(int id, String indirizzo, LatLng coordinate, int visita) {
 		super();
-		this.id = id;
+		this.nome = "Toret n. "+id;
 		this.tipo = "Toret";
 		this.indirizzo = indirizzo;
 		this.coordinate = coordinate;
 		this.visita = visita;
 	}
 
-	public Integer getNome() {
-		return id;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNome(Integer nome) {
-		this.id = nome;
+	public void setNome(int id) {
+		this.nome = "Toret n. "+id;
 	}
 
 	public String getTipo() {
@@ -49,7 +49,7 @@ public class Toretto {
 		this.coordinate = coordinate;
 	}
 
-	public Integer getVisita() {
+	public int getVisita() {
 		return visita;
 	}
 
@@ -59,7 +59,7 @@ public class Toretto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(coordinate, indirizzo, id, tipo, visita);
+		return Objects.hash(coordinate, indirizzo, nome, tipo, visita);
 	}
 
 	@Override
@@ -72,14 +72,11 @@ public class Toretto {
 			return false;
 		Toretto other = (Toretto) obj;
 		return Objects.equals(coordinate, other.coordinate) && Objects.equals(indirizzo, other.indirizzo)
-				&& Objects.equals(id, other.id) && Objects.equals(tipo, other.tipo)
-				&& Objects.equals(visita, other.visita);
+				&& Objects.equals(nome, other.nome) && Objects.equals(tipo, other.tipo) && visita == other.visita;
 	}
 
 	@Override
 	public String toString() {
-		return "Toretto: " + id + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
 	}
-	
-	
 }

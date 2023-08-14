@@ -6,23 +6,24 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class Albergo implements Comparable<Albergo>{
 
-	private Integer id;
+	private int id;
 	private String nome;
 	private String indirizzo;
-	private Double prezzo;
-	private Integer stelle;
-	private Integer cap;
+	private double prezzo;
+	private int stelle;
+	private int cap;
 	private String comune;
 	private String provincia;
 	private LatLng coordinate;
-	private Boolean bici;
+	private boolean bici;
 	private String lingue;
-	private Boolean disabili;
-	private Boolean animali;
+	private boolean disabili;
+	private boolean animali;
+	private double distanzaCentro;
 	
-	public Albergo(Integer id, String nome, String indirizzo, Double prezzo, Integer stelle, Integer cap, String comune,
-			String provincia, LatLng coordinate, Integer bici,
-			String lingue, Integer disabili, Integer animali) {
+	public Albergo(int id, String nome, String indirizzo, double prezzo, int stelle, int cap, String comune,
+			String provincia, LatLng coordinate, int bici,
+			String lingue, int disabili, int animali, double distanzaCentro) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -51,9 +52,10 @@ public class Albergo implements Comparable<Albergo>{
 		if(animali==0) {
 			this.animali=false;
 		}
+		this.distanzaCentro = distanzaCentro;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -77,7 +79,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.indirizzo = indirizzo;
 	}
 
-	public Double getPrezzo() {
+	public double getPrezzo() {
 		return prezzo;
 	}
 
@@ -85,7 +87,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.prezzo = prezzo;
 	}
 
-	public Integer getStelle() {
+	public int getStelle() {
 		return stelle;
 	}
 
@@ -93,7 +95,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.stelle = stelle;
 	}
 
-	public Integer getCap() {
+	public int getCap() {
 		return cap;
 	}
 
@@ -125,7 +127,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.coordinate = coordinate;
 	}
 
-	public Boolean getBici() {
+	public boolean getBici() {
 		return bici;
 	}
 
@@ -141,7 +143,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.lingue = lingue;
 	}
 
-	public Boolean getDisabili() {
+	public boolean getDisabili() {
 		return disabili;
 	}
 
@@ -149,7 +151,7 @@ public class Albergo implements Comparable<Albergo>{
 		this.disabili = disabili;
 	}
 
-	public Boolean getAnimali() {
+	public boolean getAnimali() {
 		return animali;
 	}
 
@@ -157,11 +159,18 @@ public class Albergo implements Comparable<Albergo>{
 		this.animali = animali;
 	}
 
+	public double getDistanzaCentro() {
+		return distanzaCentro;
+	}
+
+	public void setDistanzaCentro(double distanzaCentro) {
+		this.distanzaCentro = distanzaCentro;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(animali, bici, cap, comune, coordinate, disabili, id, indirizzo, lingue, nome, prezzo,
-				provincia, stelle);
+		return Objects.hash(animali, bici, cap, comune, coordinate, disabili, distanzaCentro, id, indirizzo, lingue,
+				nome, prezzo, provincia, stelle);
 	}
 
 	@Override
@@ -173,18 +182,19 @@ public class Albergo implements Comparable<Albergo>{
 		if (getClass() != obj.getClass())
 			return false;
 		Albergo other = (Albergo) obj;
-		return Objects.equals(animali, other.animali) && Objects.equals(bici, other.bici)
-				&& Objects.equals(cap, other.cap) && Objects.equals(comune, other.comune)
-				&& Objects.equals(coordinate, other.coordinate) && Objects.equals(disabili, other.disabili)
-				&& Objects.equals(id, other.id) && Objects.equals(indirizzo, other.indirizzo)
-				&& Objects.equals(lingue, other.lingue) && Objects.equals(nome, other.nome)
-				&& Objects.equals(prezzo, other.prezzo) && Objects.equals(provincia, other.provincia)
-				&& Objects.equals(stelle, other.stelle);
+		return animali == other.animali && bici == other.bici && cap == other.cap
+				&& Objects.equals(comune, other.comune) && Objects.equals(coordinate, other.coordinate)
+				&& disabili == other.disabili
+				&& Double.doubleToLongBits(distanzaCentro) == Double.doubleToLongBits(other.distanzaCentro)
+				&& id == other.id && Objects.equals(indirizzo, other.indirizzo) && Objects.equals(lingue, other.lingue)
+				&& Objects.equals(nome, other.nome)
+				&& Double.doubleToLongBits(prezzo) == Double.doubleToLongBits(other.prezzo)
+				&& Objects.equals(provincia, other.provincia) && stelle == other.stelle;
 	}
 
 	@Override
 	public String toString() {
-		return nome + ", indirizzo = " + indirizzo;
+		return nome + ", indirizzo = " + indirizzo + ", distanza dal centro: " + Math.round(distanzaCentro*100.0)/100.0 + " km";
 	}
 
 	@Override

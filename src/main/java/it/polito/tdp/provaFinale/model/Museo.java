@@ -10,9 +10,9 @@ public class Museo {
 	private String tipo;
 	private String indirizzo;
 	private LatLng coordinate;
-	private Integer visita;
+	private int visita;
 	
-	public Museo(String nome, String indirizzo, LatLng coordinate, Integer visita) {
+	public Museo(String nome, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = "Museo";
@@ -49,7 +49,7 @@ public class Museo {
 		this.coordinate = coordinate;
 	}
 
-	public Integer getVisita() {
+	public int getVisita() {
 		return visita;
 	}
 

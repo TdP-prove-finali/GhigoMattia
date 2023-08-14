@@ -10,9 +10,9 @@ public class Chiesa {
 	private String tipo;
 	private String indirizzo;
 	private LatLng coordinate;
-	private Integer visita;
+	private int visita;
 	
-	public Chiesa(String nome, String indirizzo, LatLng coordinate, Integer visita) {
+	public Chiesa(String nome, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = "Chiesa";
@@ -49,7 +49,7 @@ public class Chiesa {
 		this.coordinate = coordinate;
 	}
 
-	public Integer getVisita() {
+	public int getVisita() {
 		return visita;
 	}
 
