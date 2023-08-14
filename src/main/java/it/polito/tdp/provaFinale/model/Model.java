@@ -74,9 +74,9 @@ public class Model {
 		
 		//aggiungo i toret
 		this.allToretti = new ArrayList<>(dao.readToretti());
-//		for(Toretto t : allToretti) {
-//			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
-//		}
+		for(Toretto t : allToretti) {
+			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
+		}
 	}
 	
 	public void creaListaAlberghi(double prezzo, int stelle, double distanza, boolean bici, boolean disabili, boolean animali) {
@@ -148,19 +148,26 @@ public class Model {
 	public void creaGrafo() {
 		grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
-		//aggiungo, al grafo, l'albergo come punto di partenza e di arrivo
-		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Partenza", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Arrivo", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.allLuoghi.add(partenza);
-		this.allLuoghi.add(arrivo);
-		
 		//creo la lista contente i luoghi vicini all'albergo
 		this.luoghiVicini = new ArrayList<>();
 		for(Luogo l : this.allLuoghi) {
-			if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=4) {
-				this.luoghiVicini.add(l);
+			if(l.getTipo().compareTo("Parco")==0) {
+				if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=2) {
+					this.luoghiVicini.add(l);
+				}
+			}
+			else {
+				if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=4) {
+					this.luoghiVicini.add(l);
+				}
 			}
 		}
+		
+		//aggiungo, al grafo, l'albergo come punto di partenza e di arrivo
+		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Partenza", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Arrivo", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.luoghiVicini.add(partenza);
+		this.luoghiVicini.add(arrivo);
 		
 		//aggiungo i vertici al grafo
 		Graphs.addAllVertices(this.grafo, this.luoghiVicini);
@@ -202,14 +209,14 @@ public class Model {
 		
 		List<Luogo> parziale = new ArrayList<>();
 		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false);
+		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, false);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean toretti, boolean locali) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean toretti, boolean locali, boolean parchi) {
 		System.out.println("i");
 		
-		if(parziale.get(parziale.size()-1).equals(arrivo)) {
-			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size()) && cont<this.durata)) {
+		if(parziale.contains(arrivo)) {
+			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}
@@ -224,11 +231,14 @@ public class Model {
 							parziale.add(l);
 							cont=cont+l.getVisita();
 							toretti=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali);
+							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
 							cont=cont-l.getVisita();
 							toretti=false;
 							parziale.remove(l);
 						}
+					}
+					else {
+						return;
 					}
 				}
 				else if(l.getTipo().compareTo("Locale storico")==0) {
@@ -237,11 +247,30 @@ public class Model {
 							parziale.add(l);
 							cont=cont+l.getVisita();
 							locali=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali);
+							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
 							cont=cont-l.getVisita();
 							locali=false;
 							parziale.remove(l);
 						}
+					}
+					else {
+						return;
+					}
+				}
+				else if(l.getTipo().compareTo("Parco")==0) {
+					if(parchi==false) {
+						if((cont+l.getVisita())<=this.tempoDisponibile){
+							parziale.add(l);
+							cont=cont+l.getVisita();
+							parchi=true;
+							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
+							cont=cont-l.getVisita();
+							parchi=false;
+							parziale.remove(l);
+						}
+					}
+					else {
+						return;
 					}
 				}
 //				DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
@@ -257,7 +286,7 @@ public class Model {
 					if((cont+l.getVisita())<=this.tempoDisponibile){
 						parziale.add(l);
 						cont=cont+l.getVisita();
-						ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali);
+						ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
 						cont=cont-l.getVisita();
 						parziale.remove(l);
 					}

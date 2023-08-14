@@ -15,7 +15,9 @@ public class TestModel {
 		m.setAlbergo(a);
 //		System.out.println(a);
 		m.creaGrafo();
-		m.creaItinerario(60.0, 0, 0, 0);
+		long tic = System.currentTimeMillis();
+		m.creaItinerario(30.0, 0, 0, 0);
+		long toc = System.currentTimeMillis();
 		List<Luogo> itinerario = m.getItinerarioMigliore();
 		for(int i=0;i<itinerario.size();i++) {
 			if(i==0) {
@@ -29,6 +31,7 @@ public class TestModel {
 		}
 		System.out.println("\nPosti visitabili: "+itinerario.size());
 		System.out.println("\nDurata complessiva: "+m.getDurata());
+		System.out.println("\n\n"+((toc-tic)/1000)+" secondi");
 	}
 
 }

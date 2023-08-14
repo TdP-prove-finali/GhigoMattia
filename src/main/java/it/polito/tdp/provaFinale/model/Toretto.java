@@ -14,7 +14,7 @@ public class Toretto {
 	
 	public Toretto(int id, String indirizzo, LatLng coordinate, int visita) {
 		super();
-		this.nome = "Toret n. "+id;
+		this.nome = "n. "+id;
 		this.tipo = "Toret";
 		this.indirizzo = indirizzo;
 		this.coordinate = coordinate;
