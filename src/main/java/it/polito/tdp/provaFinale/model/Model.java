@@ -25,6 +25,8 @@ public class Model {
 	private List<Museo> allMusei;
 	private List<Teatro> allTeatri;
 	private List<Toretto> allToretti;
+	private List<Altro> parchiVicini;
+	private Toretto toretVicino;
 	private Luogo partenza;
 	private Luogo arrivo;
 	
@@ -145,27 +147,50 @@ public class Model {
 		this.albergoScelto = albergo;
 	}
 
+	public void creaListaParchi() {
+		this.parchiVicini = new ArrayList<>();
+		for(Altro a : this.allAltri) {
+			if(a.getTipo().compareTo("Parco")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<4) {
+				this.parchiVicini.add(a);
+			}
+		}
+	}
+	
+	public void setToret() {
+		double distanza = Double.MAX_VALUE;
+		Toretto vicino = null;
+		for(Toretto t : this.allToretti) {
+			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), t.getCoordinate(), LengthUnit.KILOMETER)<distanza) {
+				distanza = LatLngTool.distance(albergoScelto.getCoordinate(), t.getCoordinate(), LengthUnit.KILOMETER);
+				vicino = t;
+			}
+		}
+		this.toretVicino = vicino;
+	}
+	
 	public void creaGrafo() {
 		grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
 		//creo la lista contente i luoghi vicini all'albergo
 		this.luoghiVicini = new ArrayList<>();
 		for(Luogo l : this.allLuoghi) {
-			if(l.getTipo().compareTo("Parco")==0) {
-				if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=2) {
-					this.luoghiVicini.add(l);
+			if(l.getTipo().compareTo("Parco")!=0 && l.getTipo().compareTo("Toret")!=0) {
+				if(LatLngTool.distance(centro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)<0.5) {
+					if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=0.3) {
+						this.luoghiVicini.add(l);
+					}
 				}
-			}
-			else {
-				if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=4) {
-					this.luoghiVicini.add(l);
+				else {
+					if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=4) {
+						this.luoghiVicini.add(l);
+					}
 				}
 			}
 		}
 		
 		//aggiungo, al grafo, l'albergo come punto di partenza e di arrivo
-		this.partenza = new Luogo("Partenza: "+this.albergoScelto.getNome(), "Partenza", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.arrivo = new Luogo("Arrivo: "+this.albergoScelto.getNome(), "Arrivo", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.partenza = new Luogo(this.albergoScelto.getNome(), "PARTENZA", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		this.arrivo = new Luogo(this.albergoScelto.getNome(), "ARRIVO", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
 		this.luoghiVicini.add(partenza);
 		this.luoghiVicini.add(arrivo);
 		
@@ -178,7 +203,7 @@ public class Model {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
 					//non vengono collegati luoghi simili o troppo lontani
-					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Chiesa")==0 || l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0 || l1.getTipo().compareTo("Toret")==0) || l1.getTipo().compareTo("Parco")==0 || l1.getTipo().compareTo("Locale storico")==0) || (l1.getTipo().compareTo("Toret")==0 && l2.getTipo().compareTo("Locale storico")==0) || (l1.getTipo().compareTo("Locale storico")==0 && l2.getTipo().compareTo("Toret")==0) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>4)	{
+					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Chiesa")==0 || l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0) || l1.getTipo().compareTo("Parco")==0 || l1.getTipo().compareTo("Locale storico")==0) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>2)	{
 						controllo = true;
 					}
 					if(controllo==false) {
@@ -209,12 +234,11 @@ public class Model {
 		
 		List<Luogo> parziale = new ArrayList<>();
 		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, false);
+		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean toretti, boolean locali, boolean parchi) {
-		System.out.println("i");
-		
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean locali) {
+//		System.out.println("i");
 		if(parziale.contains(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
@@ -225,30 +249,22 @@ public class Model {
 			
 		for(Luogo l : adiacenti) {
 			if(!parziale.contains(l)) {
-				if(l.getTipo().compareTo("Toret")==0) {
-					if(toretti==false) {
-						if((cont+l.getVisita())<=this.tempoDisponibile){
-							parziale.add(l);
-							cont=cont+l.getVisita();
-							toretti=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
-							cont=cont-l.getVisita();
-							toretti=false;
-							parziale.remove(l);
-						}
-					}
-					else {
-						return;
-					}
-				}
-				else if(l.getTipo().compareTo("Locale storico")==0) {
+				if(l.getTipo().compareTo("Locale storico")==0) {
 					if(locali==false) {
-						if((cont+l.getVisita())<=this.tempoDisponibile){
+						DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+						double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
+						double successivo = 0.0;
+						double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+						if(distanza<=1.5) {
+							successivo = distanza*60/4;
+						}
+						else {
+							successivo = distanza*60/20;
+						}
+						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
-							cont=cont+l.getVisita();
 							locali=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
-							cont=cont-l.getVisita();
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), locali);
 							locali=false;
 							parziale.remove(l);
 						}
@@ -257,37 +273,20 @@ public class Model {
 						return;
 					}
 				}
-				else if(l.getTipo().compareTo("Parco")==0) {
-					if(parchi==false) {
-						if((cont+l.getVisita())<=this.tempoDisponibile){
-							parziale.add(l);
-							cont=cont+l.getVisita();
-							parchi=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
-							cont=cont-l.getVisita();
-							parchi=false;
-							parziale.remove(l);
-						}
+				else {
+					DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+					double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
+					double successivo = 0.0;
+					double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+					if(distanza<=1.5) {
+						successivo = distanza*60/4;
 					}
 					else {
-						return;
+						successivo = distanza*60/20;
 					}
-				}
-//				DefaultWeightedEdge precedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
-//				double successivo = 0.0;
-//				double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
-//				if(distanza<=1.5) {
-//					successivo = distanza*60/4;
-//				}
-//				else {
-//					successivo = distanza*60/20;
-//				}
-				else {
-					if((cont+l.getVisita())<=this.tempoDisponibile){
+					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						cont=cont+l.getVisita();
-						ricorsione(parziale, this.getAdiacenti(l), cont, toretti, locali, parchi);
-						cont=cont-l.getVisita();
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), locali);
 						parziale.remove(l);
 					}
 				}
@@ -295,10 +294,11 @@ public class Model {
 		}
 	}
 
-	private List<Luogo> getAdiacenti(Luogo partenza) {
+	public List<Luogo> getAdiacenti(Luogo partenza) {
 		List<Luogo> adiacenti = Graphs.successorListOf(this.grafo, partenza);
 		return adiacenti;
 	}
+	
 	
 	public List<Luogo> getItinerarioMigliore() {
 		return itinerarioMigliore;
@@ -351,6 +351,7 @@ public class Model {
 	public List<Teatro> getAllTeatri() {
 		return allTeatri;
 	}
+	
 
 	public List<Toretto> getAllToretti() {
 		return allToretti;
@@ -363,5 +364,14 @@ public class Model {
 			}
 		}
 		return null;
+	}
+	
+	public List<Altro> getParchi(){
+		this.parchiVicini.sort(null);
+		return this.parchiVicini;
+	}
+	
+	public Toretto getToret() {
+		return this.toretVicino;
 	}
 }

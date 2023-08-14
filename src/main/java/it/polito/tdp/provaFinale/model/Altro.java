@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-public class Altro {
+public class Altro implements Comparable<Altro>{
 
 	private String nome;
 	private String tipo;
@@ -78,7 +78,12 @@ public class Altro {
 
 	@Override
 	public String toString() {
-		return tipo + ": " + nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return tipo + ": " + nome + ", indirizzo = " + indirizzo;
+	}
+
+	@Override
+	public int compareTo(Altro o) {
+		return this.nome.compareTo(o.nome);
 	}
 	
 	

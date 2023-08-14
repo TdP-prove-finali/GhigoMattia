@@ -14,7 +14,7 @@ public class Toretto {
 	
 	public Toretto(int id, String indirizzo, LatLng coordinate, int visita) {
 		super();
-		this.nome = "n. "+id;
+		this.nome = "Toret n. "+id;
 		this.tipo = "Toret";
 		this.indirizzo = indirizzo;
 		this.coordinate = coordinate;
@@ -77,6 +77,6 @@ public class Toretto {
 
 	@Override
 	public String toString() {
-		return nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return nome + ", indirizzo = " + indirizzo;
 	}
 }

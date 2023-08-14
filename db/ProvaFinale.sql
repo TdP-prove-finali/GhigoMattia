@@ -458,31 +458,31 @@ INSERT INTO `luoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indiri
 	(30, 'Galleria', 'Galleria Subalpina', '45.0694498', '7.6864269', 'Galleria Subalpina 16', 10),
 	(31, 'Galleria', 'Galleria San Federico', '45.0691018', '7.6828202', 'Galleria S. Federico 7', 10),
 	(32, 'Galleria', 'Galleria Umberto I', '45.0752172', '7.6833382', 'Galleria Umberto I 21', 10),
-	(33, 'Piazza', 'Piazza Castello', '45.0712739', '7.6850742', 'Piazza Castello', 10),
+	(33, 'Piazza', 'Piazza Castello', '45.0712739', '7.6850742', 'Piazza Castello', 0),
 	(34, 'Parco', 'Parco Archeologico Torri Palatine', '45.0748324', '7.6852019', 'Via Porta Palatina', 0),
 	(35, 'Luogo particolare', 'Porta Palatina', '45.0750564', '7.6846796', 'Piazza Cesare Augusto', 10),
-	(36, 'Piazza', 'Piazza Palazzo di Città', '45.0730155', '7.6814880', 'Piazza Palazzo di Città', 10),
-	(37, 'Piazza', 'Piazza Carlo Emanuele II', '45.0663077', '7.6889094', 'Piazza Carlo Emanuele II', 10),
-	(38, 'Piazza', 'Piazza Vittorio Veneto', '45.0647440', '7.6955917', 'Piazza Vittorio Veneto', 20),
+	(36, 'Piazza', 'Piazza Palazzo di Città', '45.0730155', '7.6814880', 'Piazza Palazzo di Città', 0),
+	(37, 'Piazza', 'Piazza Carlo Emanuele II', '45.0663077', '7.6889094', 'Piazza Carlo Emanuele II', 0),
+	(38, 'Piazza', 'Piazza Vittorio Veneto', '45.0647440', '7.6955917', 'Piazza Vittorio Veneto', 0),
 	(39, 'Parco', 'Giardino Cavour', '45.0632027', '7.6896024', 'Piazza Cavour', 0),
-	(40, 'Piazza', 'Piazza Carlo Alberto', '45.0687174', '7.6863447', 'Piazza Carlo Alberto', 10),
-	(41, 'Piazza', 'Piazza San Carlo', '45.0677140', '7.6824892', 'Piazza San Carlo', 10),
-	(42, 'Piazza', 'Piazza Solferino', '45.0690007', '7.6771052', 'Piazza Solferino', 20),
-	(43, 'Piazza', 'Piazzale Duca d\'Aosta', '45.0621258', '7.6632637', 'Piazzale Duca d\'Aosta', 10),
+	(40, 'Piazza', 'Piazza Carlo Alberto', '45.0687174', '7.6863447', 'Piazza Carlo Alberto', 0),
+	(41, 'Piazza', 'Piazza San Carlo', '45.0677140', '7.6824892', 'Piazza San Carlo', 0),
+	(42, 'Piazza', 'Piazza Solferino', '45.0690007', '7.6771052', 'Piazza Solferino', 0),
+	(43, 'Piazza', 'Piazzale Duca d\'Aosta', '45.0621258', '7.6632637', 'Piazzale Duca d\'Aosta', 0),
 	(44, 'Parco', 'Parco Braccini', '45.0610417', '7.6523709', 'Via Osasco', 0),
 	(45, 'Luogo particolare', 'OGR - Officine Grandi Riparazioni', '45.0666858', '7.659651', 'Corso Castelfidardo 22', 45),
 	(46, 'Parco', 'Giardino Nicola Grosa', '45.0699163', '7.6617593', 'Via Giovanni Falcone', 0),
-	(47, 'Piazza', 'Piazza Statuto', '45.0762045', '7.6710156', 'Piazza Statuto', 10),
-	(48, 'Piazza', 'Piazza Bengasi', '45.0172718', '7.661924', 'Piazza Bengasi', 10),
-	(49, 'Piazza', 'Piazza Carignano', '45.0692064', '7.6849294', 'Piazza Carignano', 10),
-	(50, 'Piazza', 'Piazza Carlo Felice', '45.0642364', '7.6796516', 'Piazza Carlo Felice', 10),
-	(51, 'Piazza', 'Piazza Cavour', '45.0636868', '7.689876', 'Piazza Cavour', 10),
-	(52, 'Piazza', 'Piazza C.L.N.', '45.066374', '7.6820289', 'Piazza C.L.N.', 10),
-	(53, 'Piazza', 'Piazza Giambattista Bodoni', '45.0632194', '7.6835844', 'Piazza Giambattista Bodoni', 10),
-	(55, 'Piazza', 'Piazzale Grande Torino', '45.0430128', '7.6518530', 'Piazzale Grande Torino', 10),
-	(56, 'Piazza', 'Piazza San Giovanni', '45.0734937', '7.6847691', 'Piazza San Giovanni', 10),
-	(57, 'Piazza', 'Piazza Savoia', '45.0749527', '7.6774626', 'Piazza Savoia', 10),
-	(58, 'Piazza', 'Piazza XVIII Dicembre', '45.0735393', '7.6680753', 'Piazza XVIII Dicembre', 10),
+	(47, 'Piazza', 'Piazza Statuto', '45.0762045', '7.6710156', 'Piazza Statuto', 0),
+	(48, 'Piazza', 'Piazza Bengasi', '45.0172718', '7.661924', 'Piazza Bengasi', 0),
+	(49, 'Piazza', 'Piazza Carignano', '45.0692064', '7.6849294', 'Piazza Carignano', 0),
+	(50, 'Piazza', 'Piazza Carlo Felice', '45.0642364', '7.6796516', 'Piazza Carlo Felice', 0),
+	(51, 'Piazza', 'Piazza Cavour', '45.0636868', '7.689876', 'Piazza Cavour', 0),
+	(52, 'Piazza', 'Piazza C.L.N.', '45.066374', '7.6820289', 'Piazza C.L.N.', 0),
+	(53, 'Piazza', 'Piazza Giambattista Bodoni', '45.0632194', '7.6835844', 'Piazza Giambattista Bodoni', 0),
+	(55, 'Piazza', 'Piazzale Grande Torino', '45.0430128', '7.6518530', 'Piazzale Grande Torino', 0),
+	(56, 'Piazza', 'Piazza San Giovanni', '45.0734937', '7.6847691', 'Piazza San Giovanni', 0),
+	(57, 'Piazza', 'Piazza Savoia', '45.0749527', '7.6774626', 'Piazza Savoia', 0),
+	(58, 'Piazza', 'Piazza XVIII Dicembre', '45.0735393', '7.6680753', 'Piazza XVIII Dicembre', 0),
 	(59, 'Monumento', 'Arco Monumentale all\'Arma di Artiglieria', '45.0583733', '7.6906086', 'Viale Virgilio', 5),
 	(60, 'Monumento', 'Arco Olimpico di Torino', '45.0320441', '7.6585496', 'Via Giordano Bruno 181', 5),
 	(61, 'Monumento', '\'Eco\' di Marc Didou', '45.0678692', '7.6937733', 'Via Giuseppe Verdi 39', 5),
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `musei` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.musei: ~45 rows (circa)
+-- Dump dei dati della tabella provafinale.musei: ~43 rows (circa)
 DELETE FROM `musei`;
 INSERT INTO `musei` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(26, 'Museo Lavazza', '45.080978', '7.6925657', 'Via Bologna 32', 90),
@@ -662,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `teatri` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='\r\n';
 
--- Dump dei dati della tabella provafinale.teatri: ~26 rows (circa)
+-- Dump dei dati della tabella provafinale.teatri: ~27 rows (circa)
 DELETE FROM `teatri`;
 INSERT INTO `teatri` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(1, 'Casa del Teatro Ragazzi e Giovani (visitabile solo esternamente)', '45.0415304', '7.6539381', 'Corso Galileo Ferraris 266', 15),
