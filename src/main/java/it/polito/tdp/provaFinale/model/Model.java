@@ -86,59 +86,71 @@ public class Model {
 		//creo la lista contenente gli alberghi filtrati
 		this.alberghiFiltrati = new ArrayList<>();
 		
-		if(bici==true && disabili==true && animali==true) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili && a.getAnimali()==animali) {
-					this.alberghiFiltrati.add(a);
+		if(bici==true) {
+			if(disabili==true) {
+				if(animali==true) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili && a.getAnimali()==animali) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
+				}
+				if(animali==false) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
+				}
+			}
+			if(disabili==false) {
+				if(animali==true) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getAnimali()==animali) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
+				}
+				if(animali==false) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
 				}
 			}
 		}
-		else if(bici==true && disabili==true && animali==false) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili) {
-					this.alberghiFiltrati.add(a);
+		if(bici==false) {
+			if(disabili==true) {
+				if(animali==true) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili && a.getAnimali()==animali) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
+				}
+				if(animali==false) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
 				}
 			}
-		}
-		else if(bici==true && disabili==false && animali==true) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getAnimali()==animali) {
-					this.alberghiFiltrati.add(a);
+			if(disabili==false) {
+				if(animali==true) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getAnimali()==animali) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
 				}
-			}
-		}
-		else if(bici==false && disabili==true && animali==true) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili && a.getAnimali()==animali) {
-					this.alberghiFiltrati.add(a);
-				}
-			}
-		}
-		else if(bici==true && disabili==false && animali==false) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici) {
-					this.alberghiFiltrati.add(a);
-				}
-			}
-		}
-		else if(bici==false && disabili==false && animali==true) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getAnimali()==animali) {
-					this.alberghiFiltrati.add(a);
-				}
-			}
-		}
-		else if(bici==false && disabili==true && animali==false) {
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili) {
-					this.alberghiFiltrati.add(a);
-				}
-			}
-		}
-		else if(bici==false && disabili==false && animali==false){
-			for(Albergo a : this.allAlberghi) {
-				if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza) {
-					this.alberghiFiltrati.add(a);
+				if(animali==false) {
+					for(Albergo a : this.allAlberghi) {
+						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(centro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza) {
+							this.alberghiFiltrati.add(a);
+						}
+					}
 				}
 			}
 		}
@@ -272,12 +284,117 @@ public class Model {
 		
 		List<Luogo> parziale = new ArrayList<>();
 		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, false);
+		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, boolean chiese) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
+				if(this.stelleCulto==3) {
+					if(this.stelleIntrattenimento==3) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==2) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==1) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+				}
+				if(this.stelleCulto==2) {
+					if(this.stelleIntrattenimento==3) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==2) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==1) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+				}
+				if(this.stelleCulto==1) {
+					if(this.stelleIntrattenimento==3) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==2) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+					if(this.stelleIntrattenimento==1) {
+						if(this.stelleStorico==3) {
+							
+						}
+						if(this.stelleStorico==2) {
+							
+						}
+						if(this.stelleStorico==1) {
+							
+						}
+					}
+				}
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}
@@ -344,9 +461,9 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						chiese=true;
+						chiese++;
 						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese);
-						chiese=false;
+						chiese--;
 						parziale.remove(l);
 					}
 				}
