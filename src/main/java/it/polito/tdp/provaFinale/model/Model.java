@@ -277,7 +277,7 @@ public class Model {
 	
 	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, boolean chiese) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
-			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata)) && chiese==true) {
+			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}

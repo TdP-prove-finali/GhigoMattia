@@ -38,7 +38,7 @@ public class TestModel {
 //		m.creaGrafo();
 		
 		long tic = System.currentTimeMillis();
-		m.creaItinerario(120.0, 2, 2, 2);
+		m.creaItinerario(120.0, 1, 1, 2);
 		long toc = System.currentTimeMillis();
 		List<Luogo> itinerario = m.getItinerarioMigliore();
 		for(int i=0;i<itinerario.size();i++) {
