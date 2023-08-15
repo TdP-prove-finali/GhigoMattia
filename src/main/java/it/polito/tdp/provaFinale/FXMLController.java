@@ -92,6 +92,7 @@ public class FXMLController {
     	this.txtError.setText("");
     	Albergo a = this.cmbHotel.getValue();
     	this.cmbTempo.getItems().clear();
+    	this.cmbTempo.getItems().add(0.5+" h");
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
@@ -196,6 +197,7 @@ public class FXMLController {
     @FXML
     void handleBtnEliminaFiltriLuoghi(ActionEvent event) {
     	this.cmbTempo.getItems().clear();
+    	this.cmbTempo.getItems().add(0.5+" h");
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
@@ -270,6 +272,7 @@ public class FXMLController {
     	for(double i=1;i<=8;i++) {
     		this.cmbDistanza.getItems().add(i+" km");
     	}
+    	this.cmbTempo.getItems().add(0.5+" h");
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
