@@ -37,7 +37,7 @@ public class Model {
 	private double tempoDisponibile;
 	private int stelleCulto;
 	private int stelleIntrattenimento;
-	private int stelleStorico;
+	private int stelleMusei;
 	
 	private List<Luogo> itinerarioMigliore;
 	private double durata;
@@ -277,7 +277,7 @@ public class Model {
 		this.tempoDisponibile = tempoDisponibile;
 		this.stelleCulto = stelleCulto;
 		this.stelleIntrattenimento = stelleIntrattenimento;
-		this.stelleStorico = stelleStorico;
+		this.stelleMusei = stelleStorico;
 		
 		this.creaGrafo();
 		
@@ -286,10 +286,10 @@ public class Model {
 		
 		List<Luogo> parziale = new ArrayList<>();
 		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0, 0);
+		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0, false);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese, int storico) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese, boolean musei) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
@@ -298,105 +298,105 @@ public class Model {
 			else if(parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata)) {
 				if(this.stelleCulto==3) {
 					if(this.stelleIntrattenimento==3) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==2) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==1) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 				}
 				if(this.stelleCulto==2) {
 					if(this.stelleIntrattenimento==3) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==2) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==1) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 				}
 				if(this.stelleCulto==1) {
 					if(this.stelleIntrattenimento==3) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==2) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
 					if(this.stelleIntrattenimento==1) {
-						if(this.stelleStorico==3) {
+						if(this.stelleMusei==3) {
 							
 						}
-						if(this.stelleStorico==2) {
+						if(this.stelleMusei==2) {
 							
 						}
-						if(this.stelleStorico==1) {
+						if(this.stelleMusei==1) {
 							
 						}
 					}
@@ -422,7 +422,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							teatri=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
 							teatri=false;
 							parziale.remove(l);
 						}
@@ -446,7 +446,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							cinema=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
 							cinema=false;
 							parziale.remove(l);
 						}
@@ -466,12 +466,12 @@ public class Model {
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
 						chiese++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
 						chiese--;
 						parziale.remove(l);
 					}
 				}
-				else if(l.getTipo().compareTo("Monumento")==0) {
+				else if(l.getTipo().compareTo("Museo")==0) {
 					DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
 					double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
 					double successivo = 0.0;
@@ -484,28 +484,9 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						storico++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
-						storico--;
-						parziale.remove(l);
-					}
-				}
-				else if(l.getTipo().compareTo("Piazza")==0) {
-					DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
-					double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
-					double successivo = 0.0;
-					double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
-					if(distanza<=1.5) {
-						successivo = distanza*60/4;
-					}
-					else {
-						successivo = distanza*60/20;
-					}
-					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
-						parziale.add(l);
-						storico++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
-						storico--;
+						musei=true;
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+						musei=false;
 						parziale.remove(l);
 					}
 				}
@@ -522,7 +503,7 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
 						parziale.remove(l);
 					}
 				}
