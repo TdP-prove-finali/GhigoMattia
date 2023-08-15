@@ -31,10 +31,10 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private CheckBox CheckAnimali;
+    private CheckBox checkAnimali;
 
     @FXML
-    private CheckBox CheckDisabili;
+    private CheckBox checkDisabili;
 
     @FXML
     private CheckBox checkBici;
@@ -44,6 +44,9 @@ public class FXMLController {
 
     @FXML
     private Button btnImpostaFiltriLuoghi;
+    
+    @FXML
+    private Button btnImpostaFiltriHotel;
 
     @FXML
     private ComboBox<String> cmbDistanza;
@@ -64,13 +67,13 @@ public class FXMLController {
     private GridPane gridFiltriLuoghi;
 
     @FXML
-    private ComboBox<Integer> cmbChiese;
+    private ComboBox<String> cmbCulto;
 
     @FXML
-    private ComboBox<Integer> cmbMusei;
+    private ComboBox<String> cmbIntrattenimento;
 
     @FXML
-    private ComboBox<Integer> cmbTeatri;
+    private ComboBox<String> cmbMusei;
     
     @FXML
     private Label labelLuoghi;
@@ -79,27 +82,31 @@ public class FXMLController {
     private Label labelNumeroHotel;
 
     @FXML
-    private TextArea textArea;
+    private TextArea txtArea;
+
+    @FXML
+    private Label txtError;
     
     @FXML
     void btnInvio(ActionEvent event) {
+    	this.txtError.setText("");
     	Albergo a = this.cmbHotel.getValue();
     	this.cmbTempo.getItems().clear();
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
-    	this.cmbChiese.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbChiese.getItems().add(i);
-    	}
+    	this.cmbCulto.getItems().clear();
+    	this.cmbCulto.getItems().add("Non interessato");
+   		this.cmbCulto.getItems().add("Mediamente interessato");
+   		this.cmbCulto.getItems().add("Molto interessato");
+    	this.cmbIntrattenimento.getItems().clear();
+    	this.cmbIntrattenimento.getItems().add("Non interessato");
+   		this.cmbIntrattenimento.getItems().add("Mediamente interessato");
+   		this.cmbIntrattenimento.getItems().add("Molto interessato");
     	this.cmbMusei.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbMusei.getItems().add(i);
-    	}
-    	this.cmbTeatri.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbTeatri.getItems().add(i);
-    	}
+    	this.cmbMusei.getItems().add("Non interessato");
+   		this.cmbMusei.getItems().add("Mediamente interessato");
+   		this.cmbMusei.getItems().add("Molto interessato");
     	if(a!=null) {
     		this.labelLuoghi.setDisable(false);
     		this.btnImpostaFiltriLuoghi.setDisable(false);
@@ -107,46 +114,58 @@ public class FXMLController {
     		this.gridFiltriLuoghi.setDisable(false);
     		this.model.setAlbergo(a);
     	}
+    	else {
+    		this.txtError.setText("Selezionare un albergo!");
+    	}
     }
     
     @FXML
-    void btnImpostaFiltriHotel(ActionEvent event) {
-    	this.cmbHotel.getItems().clear();
+    void handleBtnImpostaFiltriHotel(ActionEvent event) {
+    	boolean controllo = false;
     	Double prezzo = Double.MAX_VALUE;
     	if(this.cmbPrezzo.getValue()!=null) {
+    		controllo = true;
     		int indice = this.cmbPrezzo.getValue().indexOf(" ");
     		prezzo = Double.parseDouble(this.cmbPrezzo.getValue().substring(0, indice));
     	}
     	Integer stelle = Integer.MIN_VALUE;
     	if(this.cmbStelle.getValue()!=null) {
+    		controllo = true;
     		stelle = this.cmbStelle.getValue();
     	}
     	Double distanza = Double.MAX_VALUE;
     	if(this.cmbDistanza.getValue()!=null) {
+    		controllo = true;
     		int indice = this.cmbDistanza.getValue().indexOf(" ");
     		distanza = Double.parseDouble(this.cmbDistanza.getValue().substring(0, indice));
+    	}	
+    	boolean animali = false;
+    	if(this.checkAnimali.isSelected()) {
+    		controllo = true;
+    		animali = true;
     	}
     	boolean bici = false;
     	if(this.checkBici.isSelected()) {
+    		controllo = true;
     		bici = true;
     	}
     	boolean disabili = false;
-    	if(this.CheckDisabili.isSelected()) {
+    	if(this.checkDisabili.isSelected()) {
+    		controllo = true;
     		disabili = true;
     	}
-    	boolean animali = false;
-    	if(this.CheckAnimali.isSelected()) {
-    		animali = true;
-    	}
-    	model.creaListaAlberghi(prezzo, stelle, distanza, bici, disabili, animali);
-    	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
-    	this.cmbHotel.getItems().addAll(alberghiFiltrati);
-    	if(alberghiFiltrati.size()==0) {
-        	this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
-    	}
-    	else {
-    		this.cmbHotel.getItems().addAll();
-    		this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati");
+    	if(controllo==true) {
+    		this.cmbHotel.getItems().clear();
+    		model.creaListaAlberghi(prezzo, stelle, distanza, bici, disabili, animali);
+        	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
+        	this.cmbHotel.getItems().addAll(alberghiFiltrati);
+        	if(alberghiFiltrati.size()==0) {
+            	this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
+        	}
+        	else {
+        		this.cmbHotel.getItems().addAll();
+        		this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati");
+        	}
     	}
     }
     
@@ -167,9 +186,6 @@ public class FXMLController {
     	for(double i=1;i<=8;i++) {
     		this.cmbDistanza.getItems().add(i+" km");
     	}
-    	this.checkBici.setSelected(false);
-    	this.CheckDisabili.setSelected(false);
-    	this.CheckAnimali.setSelected(false);
     }
     
     @FXML
@@ -183,18 +199,18 @@ public class FXMLController {
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
-    	this.cmbChiese.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbChiese.getItems().add(i);
-    	}
+    	this.cmbCulto.getItems().clear();
+    	this.cmbCulto.getItems().add("Non interessato");
+    	this.cmbCulto.getItems().add("Mediamente interessato");
+    	this.cmbCulto.getItems().add("Molto interessato");
+    	this.cmbIntrattenimento.getItems().clear();
+    	this.cmbIntrattenimento.getItems().add("Non interessato");
+    	this.cmbIntrattenimento.getItems().add("Mediamente interessato");
+    	this.cmbIntrattenimento.getItems().add("Molto interessato");
     	this.cmbMusei.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbMusei.getItems().add(i);
-    	}
-    	this.cmbTeatri.getItems().clear();
-    	for(int i=1;i<=5;i++) {
-    		this.cmbTeatri.getItems().add(i);
-    	}
+    	this.cmbMusei.getItems().add("Non interessato");
+   		this.cmbMusei.getItems().add("Mediamente interessato");
+   		this.cmbMusei.getItems().add("Molto interessato");
     }
 
     @FXML
@@ -229,8 +245,8 @@ public class FXMLController {
 
     @FXML
     void initialize() {
-        assert CheckAnimali != null : "fx:id=\"CheckAnimali\" was not injected: check your FXML file 'provaFinale.fxml'.";
-        assert CheckDisabili != null : "fx:id=\"CheckDisabili\" was not injected: check your FXML file 'provaFinale.fxml'.";
+        assert checkAnimali != null : "fx:id=\"CheckAnimali\" was not injected: check your FXML file 'provaFinale.fxml'.";
+        assert checkDisabili != null : "fx:id=\"CheckDisabili\" was not injected: check your FXML file 'provaFinale.fxml'.";
         assert checkBici != null : "fx:id=\"checkBici\" was not injected: check your FXML file 'provaFinale.fxml'.";
         assert cmbDistanza != null : "fx:id=\"cmbDistanza\" was not injected: check your FXML file 'provaFinale.fxml'.";
         assert cmbHotel != null : "fx:id=\"cmbHotel\" was not injected: check your FXML file 'provaFinale.fxml'.";
@@ -241,6 +257,7 @@ public class FXMLController {
 
     public void setModel(Model model) {
     	this.model=model;
+    	
     	this.cmbHotel.getItems().addAll(model.getAllAlberghi());
     	this.labelNumeroHotel.setText(model.getAllAlberghi().size()+" alberghi trovati");
     	for(double i=50;i<=250;i+=50) {
@@ -256,14 +273,15 @@ public class FXMLController {
     	for(int i=1;i<=12;i++) {
     		this.cmbTempo.getItems().add(i+" h");
     	}
-    	for(int i=1;i<=3;i++) {
-    		this.cmbChiese.getItems().add(i);
-    	}
-    	for(int i=1;i<=3;i++) {
-    		this.cmbMusei.getItems().add(i);
-    	}
-    	for(int i=1;i<=3;i++) {
-    		this.cmbTeatri.getItems().add(i);
-    	}
+    	
+    	this.cmbCulto.getItems().add("Non interessato");
+    	this.cmbCulto.getItems().add("Mediamente interessato");
+    	this.cmbCulto.getItems().add("Molto interessato");
+    	this.cmbIntrattenimento.getItems().add("Non interessato");
+    	this.cmbIntrattenimento.getItems().add("Mediamente interessato");
+    	this.cmbIntrattenimento.getItems().add("Molto interessato");
+   		this.cmbMusei.getItems().add("Non interessato");
+   		this.cmbMusei.getItems().add("Mediamente interessato");
+   		this.cmbMusei.getItems().add("Molto interessato");
     }
 }

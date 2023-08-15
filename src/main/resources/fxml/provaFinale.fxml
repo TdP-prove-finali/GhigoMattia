@@ -29,6 +29,7 @@
                   <Label text="Alberghi" />
                   <ComboBox fx:id="cmbHotel" prefWidth="150.0" promptText="Scegli un hotel..." />
                   <Button mnemonicParsing="false" onAction="#btnInvio" text="Invio" />
+                  <Label fx:id="txtError" textFill="RED" />
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
@@ -37,7 +38,7 @@
             <Label fx:id="labelNumeroHotel" />
             <HBox spacing="10.0">
                <children>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnImpostaFiltriHotel" text="Imposta filtri" />
+                  <Button fx:id="btnImpostaFiltriHotel" mnemonicParsing="false" onAction="#handleBtnImpostaFiltriHotel" text="Imposta filtri" />
                   <Button mnemonicParsing="false" onAction="#btnEliminaFiltriHotel" text="Elimina filtri" />
                </children>
             </HBox>
@@ -58,12 +59,12 @@
                   <Label text="Prezzo max" />
                   <Label text="Stelle min" GridPane.columnIndex="1" />
                   <Label text="Dist. centro max" GridPane.columnIndex="2" />
-                  <Label text="Accesso bici" GridPane.columnIndex="3" />
-                  <Label text="Accesso disabili" GridPane.columnIndex="4" />
-                  <Label text="Accesso animali" GridPane.columnIndex="5" />
-                  <CheckBox fx:id="checkBici" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="CheckDisabili" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="CheckAnimali" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Label text="Accesso animali" GridPane.columnIndex="3" />
+                  <Label text="Accesso bici" GridPane.columnIndex="4" />
+                  <Label text="Accesso disabili" GridPane.columnIndex="5" />
+                  <CheckBox fx:id="checkAnimali" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="checkBici" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="checkDisabili" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                   <ComboBox fx:id="cmbStelle" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ComboBox fx:id="cmbPrezzo" prefWidth="150.0" GridPane.rowIndex="1" />
                   <ComboBox fx:id="cmbDistanza" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -93,16 +94,16 @@
                </rowConstraints>
                <children>
                   <Label text="Tempo disponibile" />
-                  <Label text="Chiese" GridPane.columnIndex="1" />
-                  <Label text="Musei" GridPane.columnIndex="2" />
-                  <Label text="Teatri" GridPane.columnIndex="3" />
+                  <Label text="Intrattenimento" GridPane.columnIndex="1" />
+                  <Label text="Luoghi di culto" GridPane.columnIndex="2" />
+                  <Label text="Musei" GridPane.columnIndex="3" />
                   <ComboBox fx:id="cmbTempo" prefWidth="150.0" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cmbChiese" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cmbMusei" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cmbTeatri" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbIntrattenimento" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbCulto" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cmbMusei" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="txtArea" editable="false" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
@@ -128,7 +129,7 @@
       </VBox>
    </center>
    <top>
-      <Label alignment="TOP_CENTER" text="Generatore di itinerari per la città di Torino" BorderPane.alignment="CENTER">
+      <Label text="Generatore di itinerari per la città di Torino" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
