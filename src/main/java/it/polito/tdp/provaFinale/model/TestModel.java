@@ -22,12 +22,18 @@ public class TestModel {
 //		m.creaListaParchi();
 //		List<Altro> parchi = m.getParchi();
 //		for(Altro p : parchi) {
-//			System.out.println(p+"\n");
+//			System.out.println(p);
 //		}
 		
 //		m.setToret();
 //		Toretto t = m.getToret();
 //		System.out.print(t+"\n");
+		
+//		m.creaListaLocali();
+//		List<Altro> locali = m.getLocali();
+//		for(Altro l : locali) {
+//			System.out.println(l);
+//		}
 		
 		m.creaGrafo();
 		

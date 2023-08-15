@@ -78,7 +78,12 @@ public class Luogo {
 
 	@Override
 	public String toString() {
-		return tipo + ": " + nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita + " minuti";
+		if(tipo.compareTo("Piazza")==0) {
+			return tipo + ": " + nome + ", indirizzo = " + indirizzo;
+		}
+		else {
+			return tipo + ": " + nome + ", indirizzo = " + indirizzo + ", durata visita stimata = " + visita + " minuti";
+		}
 	}
 	
 	

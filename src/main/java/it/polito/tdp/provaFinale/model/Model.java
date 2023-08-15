@@ -27,6 +27,7 @@ public class Model {
 	private List<Toretto> allToretti;
 	private List<Altro> parchiVicini;
 	private Toretto toretVicino;
+	private List<Altro> localiVicini;
 	private Luogo partenza;
 	private Luogo arrivo;
 	
@@ -150,7 +151,7 @@ public class Model {
 	public void creaListaParchi() {
 		this.parchiVicini = new ArrayList<>();
 		for(Altro a : this.allAltri) {
-			if(a.getTipo().compareTo("Parco")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<4) {
+			if(a.getTipo().compareTo("Parco")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<2) {
 				this.parchiVicini.add(a);
 			}
 		}
@@ -166,6 +167,15 @@ public class Model {
 			}
 		}
 		this.toretVicino = vicino;
+	}
+	
+	public void creaListaLocali() {
+		this.localiVicini = new ArrayList<>();
+		for(Altro a : this.allAltri) {
+			if(a.getTipo().compareTo("Locale storico")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<2) {
+				this.localiVicini.add(a);
+			}
+		}
 	}
 	
 	public void creaGrafo() {
@@ -203,7 +213,7 @@ public class Model {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
 					//non vengono collegati luoghi simili o troppo lontani
-					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Chiesa")==0 || l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0) || l1.getTipo().compareTo("Parco")==0 || l1.getTipo().compareTo("Locale storico")==0) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>2)	{
+					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Chiesa")==0 || l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0 || l1.getTipo().compareTo("Locale storico")==0)) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>3)	{
 						controllo = true;
 					}
 					if(controllo==false) {
@@ -238,9 +248,8 @@ public class Model {
 	}
 	
 	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean locali) {
-//		System.out.println("i");
-		if(parziale.contains(arrivo)) {
-			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
+		if(parziale.get(parziale.size()-1).equals(arrivo)) {
+			if(parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata)) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}
@@ -373,5 +382,10 @@ public class Model {
 	
 	public Toretto getToret() {
 		return this.toretVicino;
+	}
+	
+	public List<Altro> getLocali(){
+		this.localiVicini.sort(null);
+		return this.localiVicini;
 	}
 }
