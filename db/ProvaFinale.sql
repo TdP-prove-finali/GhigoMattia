@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `luoghi` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.luoghi: ~159 rows (circa)
+-- Dump dei dati della tabella provafinale.luoghi: ~177 rows (circa)
 DELETE FROM `luoghi`;
 INSERT INTO `luoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(2, 'Locale storico', 'Confetteria Stratta', '45.0674347', '7.6829804', 'Piazza San Carlo 191', 20),
@@ -587,7 +587,25 @@ INSERT INTO `luoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indiri
 	(160, 'Luogo particolare', 'Stadio Olimpico Grande Torino', '45.0419740097285', '7.650125327407188', 'Via Filadelfia 96/b', 60),
 	(161, 'Luogo particolare', 'Portone del Melograno', '45.05100918524394', '7.6733239339528865', 'Via Giovanni Argentero 4', 5),
 	(162, 'Luogo particolare', 'Sistema di accumulo San Salvario - The Heat Garden', '45.05099374439463', '7.672279334386338', 'Via Ernesto Lugaro 38', 5),
-	(163, 'Luogo particolare', 'Condominio 25 Verde', '45.04541373482233', '7.679961149219851', 'Via Gabriele Chiabrera 25', 5);
+	(163, 'Luogo particolare', 'Condominio 25 Verde', '45.04541373482233', '7.679961149219851', 'Via Gabriele Chiabrera 25', 5),
+	(165, 'Cinema', 'Ambrosio', '45.06213098487618', '7.681388606926929', 'Corso Vittorio Emanuele II 52', 15),
+	(167, 'Cinema', 'Cinema Centrale Arthouse', '45.06642587107534', '7.684864148381089', 'Via Carlo Alberto 27', 15),
+	(168, 'Cinema', 'Cinema Massimo', '45.0681264676698', '7.6925656209460325', 'Via Giuseppe Verdi 18', 15),
+	(169, 'Cinema', 'Cine Teatro Baretti', '45.058190181714984', '7.679011546528609', 'Via Giuseppe Baretti 4', 15),
+	(170, 'Cinema', 'Cinema Teatro Maffei', '45.05980298748633', '7.683095347762336', 'Via Principe Tommaso 5', 15),
+	(171, 'Cinema', 'Cinema Classico', '45.06617258291672', '7.694311809913593', 'P.za Vittorio Veneto 5', 15),
+	(172, 'Cinema', 'Due Giardini', '45.05034439124378', '7.642200606131271', 'Via Monfalcone 62', 15),
+	(173, 'Cinema', 'Cinema Eliseo Torino', '45.065087095976175', '7.6501541909326125', 'Via Monginevro 42', 15),
+	(174, 'Cinema', 'Cinema Fratelli Marx', '45.07251326855745', '7.709581618937274', 'Corso Belgio 53', 15),
+	(175, 'Cinema', 'Greenwich Village', '45.06703916546456', '7.691727454518627', 'Via Po 30', 15),
+	(176, 'Cinema', 'Cinema Ideal Cityplex', '45.07749030895421', '7.670839922416997', 'Corso Giambattista Beccaria 4', 15),
+	(177, 'Cinema', 'Massaua Cityplex', '45.07395600863194', '7.620107560039319', 'Piazza Massaua 9', 15),
+	(178, 'Cinema', 'Cinema Lux', '45.06907084174884', '7.6825475934207255', 'Galleria S. Federico 33', 15),
+	(179, 'Cinema', 'Cinema Nazionale', '45.06254524239105', '7.6833334899563575', 'Via Giuseppe Pomba 7', 15),
+	(180, 'Cinema', 'Multisala Cinema Reposi', '45.065390114687105', '7.679211522128795', 'Via XX Settembre 15', 15),
+	(181, 'Cinema', 'Cinema Romano', '45.0696547017469', '7.686732261138598', 'Galleria Subalpina, P.za Castello 9', 15),
+	(182, 'Cinema', 'The Space Cinema', '45.087300914836', '7.6682288313818425', 'Salita Michelangelo Garove 24', 15),
+	(183, 'Cinema', 'UCI Cinemas Torino Lingotto', '45.031791492570754', '7.665637096304535', 'Via Nizza 262', 15);
 
 -- Dump della struttura di tabella provafinale.musei
 DROP TABLE IF EXISTS `musei`;
@@ -662,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `teatri` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='\r\n';
 
--- Dump dei dati della tabella provafinale.teatri: ~27 rows (circa)
+-- Dump dei dati della tabella provafinale.teatri: ~26 rows (circa)
 DELETE FROM `teatri`;
 INSERT INTO `teatri` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(1, 'Casa del Teatro Ragazzi e Giovani (visitabile solo esternamente)', '45.0415304', '7.6539381', 'Corso Galileo Ferraris 266', 15),
