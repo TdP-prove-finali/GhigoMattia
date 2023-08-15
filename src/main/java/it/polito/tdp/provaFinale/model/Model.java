@@ -41,6 +41,8 @@ public class Model {
 	
 	private List<Luogo> itinerarioMigliore;
 	private double durata;
+	private List<Luogo> itinerarioMiglioreFiltrato;
+	private double durataFiltrata;
 	
 	public Model() {
 		this.dao = new provaFinaleDAO();
@@ -290,6 +292,10 @@ public class Model {
 	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
+				this.itinerarioMigliore = new ArrayList<>(parziale);
+				this.durata = cont;
+			}
+			else if(parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata)) {
 				if(this.stelleCulto==3) {
 					if(this.stelleIntrattenimento==3) {
 						if(this.stelleStorico==3) {
@@ -395,8 +401,6 @@ public class Model {
 						}
 					}
 				}
-				this.itinerarioMigliore = new ArrayList<>(parziale);
-				this.durata = cont;
 			}
 			return;
 		}
@@ -504,6 +508,19 @@ public class Model {
 		}
 		else {
 			return this.durata;
+		}
+	}
+	
+	public List<Luogo> getItinerarioMiglioreFiltrato() {
+		return itinerarioMiglioreFiltrato;
+	}
+	
+	public double getDurataFiltrata() {
+		if(this.itinerarioMiglioreFiltrato.size()==0) {
+			return 0.0;
+		}
+		else {
+			return this.durataFiltrata;
 		}
 	}
 	
