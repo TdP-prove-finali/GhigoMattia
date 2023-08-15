@@ -286,10 +286,10 @@ public class Model {
 		
 		List<Luogo> parziale = new ArrayList<>();
 		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0);
+		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0, 0);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese, int storico) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
@@ -422,7 +422,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							teatri=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
 							teatri=false;
 							parziale.remove(l);
 						}
@@ -446,7 +446,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							cinema=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
 							cinema=false;
 							parziale.remove(l);
 						}
@@ -466,8 +466,46 @@ public class Model {
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
 						chiese++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
 						chiese--;
+						parziale.remove(l);
+					}
+				}
+				else if(l.getTipo().compareTo("Monumento")==0) {
+					DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+					double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
+					double successivo = 0.0;
+					double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+					if(distanza<=1.5) {
+						successivo = distanza*60/4;
+					}
+					else {
+						successivo = distanza*60/20;
+					}
+					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
+						parziale.add(l);
+						storico++;
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+						storico--;
+						parziale.remove(l);
+					}
+				}
+				else if(l.getTipo().compareTo("Piazza")==0) {
+					DefaultWeightedEdge arcoPrecedente = grafo.getEdge(parziale.get(parziale.size()-1), l);
+					double precedente = this.grafo.getEdgeWeight(arcoPrecedente);
+					double successivo = 0.0;
+					double distanza = LatLngTool.distance(l.getCoordinate(), this.albergoScelto.getCoordinate(), LengthUnit.KILOMETER);
+					if(distanza<=1.5) {
+						successivo = distanza*60/4;
+					}
+					else {
+						successivo = distanza*60/20;
+					}
+					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
+						parziale.add(l);
+						storico++;
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
+						storico--;
 						parziale.remove(l);
 					}
 				}
@@ -484,7 +522,7 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, storico);
 						parziale.remove(l);
 					}
 				}
