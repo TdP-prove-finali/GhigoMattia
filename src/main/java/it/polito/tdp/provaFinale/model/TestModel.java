@@ -53,7 +53,6 @@ public class TestModel {
 		}
 		System.out.println("\nPosti visitabili: "+(itinerario.size()-2));
 		System.out.println("\nDurata complessiva: "+m.getDurata());
-		System.out.println("\n"+((toc-tic)/1000)+" secondi");
+		System.out.println("\n"+((toc-tic)/1000)+" secondi");	
 	}
-
 }

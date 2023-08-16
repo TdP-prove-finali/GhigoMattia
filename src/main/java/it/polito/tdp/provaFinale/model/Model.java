@@ -394,115 +394,296 @@ public class Model {
 		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0, false);
 	}
 	
-	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean teatri, boolean cinema, int chiese, boolean musei) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, double cont, boolean cinema, boolean teatri, int chiese, boolean musei) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
 				this.durata = cont;
 			}
-			else if(parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata)) {
+			if(this.stelleIntrattenimento==3) {
 				if(this.stelleCulto==3) {
-					if(this.stelleIntrattenimento==3) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+					if(this.stelleMusei==3) {
+						if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+							if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+								this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+								this.durataFiltrata = cont;
+							}
 						}
 					}
-					if(this.stelleIntrattenimento==2) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+					else if(this.stelleMusei==2) {
+						if(cinema==true && teatri==true && chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
 					}
-					if(this.stelleIntrattenimento==1) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+					else if(this.stelleMusei==1) {
+						if(cinema==true && teatri==true && chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
 					}
 				}
-				if(this.stelleCulto==2) {
-					if(this.stelleIntrattenimento==3) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
-						}
-					}
-					if(this.stelleIntrattenimento==2) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+				else if(this.stelleCulto==2) {
+					if(this.stelleMusei==3) {
+						if(cinema==true && teatri==true && chiese>=1 && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
 					}
-					if(this.stelleIntrattenimento==1) {
-						if(this.stelleMusei==3) {
-							
+					else if(this.stelleMusei==2) {
+						if(cinema==true && teatri==true && chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+					}
+					else if(this.stelleMusei==1) {
+						if(cinema==true && teatri==true && chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
 					}
 				}
-				if(this.stelleCulto==1) {
-					if(this.stelleIntrattenimento==3) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
-						}
-					}
-					if(this.stelleIntrattenimento==2) {
-						if(this.stelleMusei==3) {
-							
-						}
-						if(this.stelleMusei==2) {
-							
-						}
-						if(this.stelleMusei==1) {
-							
+				else if(this.stelleCulto==1) {
+					if(this.stelleMusei==3) {
+						if(cinema==true && teatri==true && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
 					}
-					if(this.stelleIntrattenimento==1) {
-						if(this.stelleMusei==3) {
-							
+					else if(this.stelleMusei==2) {
+						if(cinema==true && teatri==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
-						if(this.stelleMusei==2) {
-							
+					}
+					else if(this.stelleMusei==1) {
+						if(cinema==true && teatri==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
 						}
-						if(this.stelleMusei==1) {
-							
+					}
+				}
+			}
+			else if(this.stelleIntrattenimento==2) {
+				if(this.stelleCulto==3) {
+					if(this.stelleMusei==3) {
+						if((cinema==true || teatri==true) && chiese>=2 && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==2) {
+						if((cinema==true || teatri==true) && chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if((cinema==true || teatri==true) && chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}	
+					}
+				}
+				else if(this.stelleCulto==2) {
+					if(this.stelleMusei==3) {
+						if((cinema==true || teatri==true) && chiese>=1 && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==2) {
+						if((cinema==true || teatri==true) && chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if((cinema==true || teatri==true) && chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+				}
+				else if(this.stelleCulto==1) {
+					if(this.stelleMusei==3) {
+						if((cinema==true || teatri==true) && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==2) {
+						if(cinema==true || teatri==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if(cinema==true || teatri==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+				}
+			}
+			else if(this.stelleIntrattenimento==1) {
+				if(this.stelleCulto==3) {
+					if(this.stelleMusei==3) {
+						if(chiese>=2 && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==2) {
+						if(chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if(chiese>=2) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+				}
+				else if(this.stelleCulto==2) {
+					if(this.stelleMusei==3) {
+						if(chiese>=1 && musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==2) {
+						if(chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if(chiese>=1) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}	
+					}
+				}
+				else if(this.stelleCulto==1) {
+					if(this.stelleMusei==3) {
+						if(musei==true) {
+							if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+								if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+									this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+									this.durataFiltrata = cont;
+								}
+							}
+						}	
+					}
+					else if(this.stelleMusei==2) {
+						if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+							if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+								this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+								this.durataFiltrata = cont;
+							}
+						}
+					}
+					else if(this.stelleMusei==1) {
+						if(cinema==true && teatri==true && chiese>=2 && musei==true) {
+							if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+								this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+								this.durataFiltrata = cont;
+							}
 						}
 					}
 				}
@@ -527,7 +708,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							teatri=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							teatri=false;
 							parziale.remove(l);
 						}
@@ -551,7 +732,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							cinema=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							cinema=false;
 							parziale.remove(l);
 						}
@@ -571,7 +752,7 @@ public class Model {
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
 						chiese++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 						chiese--;
 						parziale.remove(l);
 					}
@@ -591,7 +772,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							musei=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							musei=false;
 							parziale.remove(l);
 						}
@@ -610,7 +791,7 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), teatri, cinema, chiese, musei);
+						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 						parziale.remove(l);
 					}
 				}
