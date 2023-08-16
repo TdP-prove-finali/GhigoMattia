@@ -196,6 +196,7 @@ public class FXMLController {
     @FXML
     void handleBtnImpostaFiltriLuoghi(ActionEvent event) {
     	
+    	
     }
     
     @FXML
