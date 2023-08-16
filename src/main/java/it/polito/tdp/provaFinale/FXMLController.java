@@ -110,7 +110,6 @@ public class FXMLController {
     		this.btnImpostaFiltriLuoghi.setDisable(false);
     		this.btnEliminaFiltriLuoghi.setDisable(false);
     		this.gridFiltriLuoghi.setDisable(false);
-    		this.btnCalcolaItinerario.setDisable(false);
     		this.model.setAlbergo(a);
     	}
     	else {
@@ -160,7 +159,7 @@ public class FXMLController {
         	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
         	this.cmbHotel.getItems().addAll(alberghiFiltrati);
         	if(alberghiFiltrati.size()==0) {
-            	this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
+            	this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri!");
         	}
         	else {
         		this.cmbHotel.getItems().addAll();
@@ -195,12 +194,18 @@ public class FXMLController {
     
     @FXML
     void handleBtnImpostaFiltriLuoghi(ActionEvent event) {
-    	
-    	
+		this.txtArea.clear();
+    	if(this.cmbTempo.getValue()!=null && this.cmbIntrattenimento.getValue()!=null && this.cmbCulto.getValue()!=null && this.cmbMusei.getValue()!=null) {
+    		this.btnCalcolaItinerario.setDisable(false);
+    	}
+    	else {
+    		this.txtArea.setText("Impostare i filtri richiesti!");
+    	}
     }
     
     @FXML
     void handleBtnEliminaFiltriLuoghi(ActionEvent event) {
+    	this.txtArea.clear();
     	this.cmbTempo.getItems().clear();
     	this.cmbTempo.getItems().add(0.5+" h");
     	for(int i=1;i<=12;i++) {
@@ -218,11 +223,12 @@ public class FXMLController {
     	this.cmbMusei.getItems().add("Non interessato");
    		this.cmbMusei.getItems().add("Mediamente interessato");
    		this.cmbMusei.getItems().add("Molto interessato");
+   		this.btnCalcolaItinerario.setDisable(true);
     }
     
     @FXML
     void handleBtnCalcolaItinerario(ActionEvent event) {
-
+    	
     }
 
     @FXML

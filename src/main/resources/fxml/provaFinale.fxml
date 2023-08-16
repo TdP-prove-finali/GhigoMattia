@@ -68,7 +68,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
                   <Label fx:id="labelLuoghi" disable="true" text="Luoghi" />
-                  <Button fx:id="btnImpostaFiltriLuoghi" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#handleBtnEliminaFiltriLuoghi" text="Imposta filtri" />
+                  <Button fx:id="btnImpostaFiltriLuoghi" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#handleBtnImpostaFiltriLuoghi" text="Imposta filtri" />
                   <Button fx:id="btnEliminaFiltriLuoghi" disable="true" mnemonicParsing="false" onAction="#handleBtnEliminaFiltriLuoghi" text="Elimina filtri" />
                </children>
                <VBox.margin>
