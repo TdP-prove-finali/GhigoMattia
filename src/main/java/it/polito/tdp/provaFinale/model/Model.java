@@ -28,6 +28,10 @@ public class Model {
 	private Altro parcoVicino;
 	private Toretto toretVicino;
 	private Altro localeVicino;
+	private Altro cinemaVicino;
+	private Teatro teatroVicino;
+	private Chiesa chiesaVicina;
+	private Museo museoVicino;
 	private Luogo partenza;
 	private Luogo arrivo;
 	
@@ -186,7 +190,7 @@ public class Model {
 		this.toretVicino = vicino;
 	}
 	
-	public void creaListaLocali() {
+	public void setLocale() {
 		double distanza = Double.MAX_VALUE;
 		Altro vicino = null;
 		for(Altro a : this.allAltri) {
@@ -196,6 +200,54 @@ public class Model {
 			}
 		}
 		this.localeVicino = vicino;
+	}
+	
+	public void setCinema() {
+		double distanza = Double.MAX_VALUE;
+		Altro vicino = null;
+		for(Altro a : this.allAltri) {
+			if(a.getTipo().compareTo("Cinema")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanza) {
+				distanza = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
+				vicino = a;
+			}
+		}
+		this.cinemaVicino = vicino;
+	}
+	
+	public void setTeatro() {
+		double distanza = Double.MAX_VALUE;
+		Teatro vicino = null;
+		for(Teatro t : this.allTeatri) {
+			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), t.getCoordinate(), LengthUnit.KILOMETER)<distanza) {
+				distanza = LatLngTool.distance(albergoScelto.getCoordinate(), t.getCoordinate(), LengthUnit.KILOMETER);
+				vicino = t;
+			}
+		}
+		this.teatroVicino = vicino;
+	}
+	
+	public void setChiesa() {
+		double distanza = Double.MAX_VALUE;
+		Chiesa vicino = null;
+		for(Chiesa c : this.allChiese) {
+			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER)<distanza) {
+				distanza = LatLngTool.distance(albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER);
+				vicino = c;
+			}
+		}
+		this.chiesaVicina = vicino;
+	}
+	
+	public void setMuseo() {
+		double distanza = Double.MAX_VALUE;
+		Museo vicino = null;
+		for(Museo m : this.allMusei) {
+			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), m.getCoordinate(), LengthUnit.KILOMETER)<distanza) {
+				distanza = LatLngTool.distance(albergoScelto.getCoordinate(), m.getCoordinate(), LengthUnit.KILOMETER);
+				vicino = m;
+			}
+		}
+		this.museoVicino = vicino;
 	}
 	
 	public void creaGrafo() {
@@ -324,11 +376,11 @@ public class Model {
 		System.out.println("Grafo creato con "+grafo.vertexSet().size()+ " vertici e "+grafo.edgeSet().size()+" archi");
 	}
 	
-	public void creaItinerario(double tempoDisponibile, int stelleCulto, int stelleIntrattenimento, int stelleStorico) {		
+	public void creaItinerario(double tempoDisponibile, int stelleIntrattenimento, int stelleCulto, int stelleMusei) {
 		this.tempoDisponibile = tempoDisponibile;
-		this.stelleCulto = stelleCulto;
 		this.stelleIntrattenimento = stelleIntrattenimento;
-		this.stelleMusei = stelleStorico;
+		this.stelleCulto = stelleCulto;
+		this.stelleMusei = stelleMusei;
 		
 		this.creaGrafo();
 		
