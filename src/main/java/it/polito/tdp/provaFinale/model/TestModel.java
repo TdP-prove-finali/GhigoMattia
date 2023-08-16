@@ -14,7 +14,7 @@ public class TestModel {
 //		System.out.println(alberghi.size());
 		
 		m.creaListaAlberghi(100000.0, 0, 1000000.0, false, false, false);
-		Albergo a = m.getAlbergo(965);
+		Albergo a = m.getAlbergo(523);
 		m.setAlbergo(a);
 //		System.out.println(a);
 		
@@ -38,9 +38,11 @@ public class TestModel {
 //		m.creaGrafo();
 		
 		long tic = System.currentTimeMillis();
-		m.creaItinerario(30.0, 1, 1, 1);
+		m.creaItinerario(30.0, 2, 1, 1);
 		long toc = System.currentTimeMillis();
 		List<Luogo> itinerario = m.getItinerarioMigliore();
+		List<Luogo> itinerarioTop = m.getItinerarioMiglioreFiltrato();
+		
 		for(int i=0;i<itinerario.size();i++) {
 			if(i==0) {
 				System.out.println("\n"+itinerario.get(i));
@@ -53,6 +55,19 @@ public class TestModel {
 		}
 		System.out.println("\nPosti visitabili: "+(itinerario.size()-2));
 		System.out.println("\nDurata complessiva: "+m.getDurata());
-		System.out.println("\n"+((toc-tic)/1000)+" secondi");	
+		System.out.println("\n"+((toc-tic)/1000)+" secondi\n\n");
+		
+		for(int i=0;i<itinerarioTop.size();i++) {
+			if(i==0) {
+				System.out.println("\n"+itinerarioTop.get(i));
+
+			}
+			else {
+				System.out.println("Spostamento: "+LatLngTool.distance(itinerarioTop.get(i-1).getCoordinate(), itinerarioTop.get(i).getCoordinate(), LengthUnit.KILOMETER)*60/4);
+				System.out.println(itinerarioTop.get(i));
+			}
+		}
+		System.out.println("\nPosti visitabili: "+(itinerarioTop.size()-2));
+		System.out.println("\nDurata complessiva: "+m.getDurataFiltrata());
 	}
 }
