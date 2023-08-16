@@ -157,12 +157,14 @@ public class FXMLController {
         	}
         	else {
         		this.cmbHotel.getItems().addAll();
-        		this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati");
+        		this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati\n");
+        		this.txtArea.appendText("Selezionare un hotel");
         	}
     	}
     	else {
         	this.txtArea.clear();
-        	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati");
+        	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati\n");
+        	this.txtArea.appendText("Selezionare un hotel");
     	}
     }
     
@@ -272,7 +274,7 @@ public class FXMLController {
     			this.txtArea.appendText("\nTeatro nelle vicinanze: "+model.getTeatro());
     		}
     	}
-    	if(culto==3) {
+    	if(culto>=2) {
     		boolean a = false;
     		for(Luogo l : itinerarioTop) {
     			if(l.getTipo().compareTo("Chiesa")==0) {
@@ -283,7 +285,7 @@ public class FXMLController {
         		this.txtArea.appendText("\nChiesa nelle vicinanze: "+model.getChiesa());
     		}
     	}
-    	if(musei==3) {
+    	if(musei>=2) {
     		boolean a = false;
     		for(Luogo l : itinerarioTop) {
     			if(l.getTipo().compareTo("Museo")==0) {
