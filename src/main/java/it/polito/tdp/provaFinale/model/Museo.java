@@ -78,7 +78,7 @@ public class Museo {
 
 	@Override
 	public String toString() {
-		return "Museo: " + nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
 	}
 	
 	

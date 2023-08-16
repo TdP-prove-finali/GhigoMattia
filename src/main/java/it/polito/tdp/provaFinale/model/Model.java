@@ -164,6 +164,13 @@ public class Model {
 	
 	public void setAlbergo(Albergo albergo) {
 		this.albergoScelto = albergo;
+		this.setChiesa();
+		this.setCinema();
+		this.setLocale();
+		this.setMuseo();
+		this.setParco();
+		this.setTeatro();
+		this.setToret();
 	}
 
 	public void setParco() {
@@ -371,9 +378,7 @@ public class Model {
 					}
 				}
 			}
-		}
-		
-		System.out.println("Grafo creato con "+grafo.vertexSet().size()+ " vertici e "+grafo.edgeSet().size()+" archi");
+		}		
 	}
 	
 	public void creaItinerario(double tempoDisponibile, int stelleIntrattenimento, int stelleCulto, int stelleMusei) {
@@ -623,19 +628,15 @@ public class Model {
 						}	
 					}
 					else if(this.stelleMusei==2) {
-						if(cinema==true && teatri==true && chiese>=2 && musei==true) {
-							if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
-								this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
-								this.durataFiltrata = cont;
-							}
+						if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+							this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+							this.durataFiltrata = cont;
 						}
 					}
 					else if(this.stelleMusei==1) {
-						if(cinema==true && teatri==true && chiese>=2 && musei==true) {
-							if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
-								this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
-								this.durataFiltrata = cont;
-							}
+						if((parziale.size()>this.itinerarioMiglioreFiltrato.size() || (parziale.size()==this.itinerarioMiglioreFiltrato.size() && cont<this.durataFiltrata))) {
+							this.itinerarioMiglioreFiltrato = new ArrayList<>(parziale);
+							this.durataFiltrata = cont;
 						}
 					}
 				}
@@ -841,15 +842,33 @@ public class Model {
 		return null;
 	}
 	
+	public Chiesa getChiesa(){
+		return this.chiesaVicina;
+	}
+	
+	public Altro getCinema() {
+		return this.cinemaVicino;
+	}
+	
+	public Altro getLocale(){
+		return this.localeVicino;
+	}
+	
+	public Museo getMuseo() {
+		return this.museoVicino;
+	}
+	
 	public Altro getParco(){
 		return this.parcoVicino;
+	}
+	
+	public Teatro getTeatro(){
+		return this.teatroVicino;
 	}
 	
 	public Toretto getToret() {
 		return this.toretVicino;
 	}
 	
-	public Altro getLocale(){
-		return this.localeVicino;
-	}
+	
 }

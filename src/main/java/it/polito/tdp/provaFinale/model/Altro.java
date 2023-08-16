@@ -78,7 +78,7 @@ public class Altro implements Comparable<Altro>{
 
 	@Override
 	public String toString() {
-		return tipo + ": " + nome + ", indirizzo = " + indirizzo;
+		return nome + ", indirizzo = " + indirizzo;
 	}
 
 	@Override

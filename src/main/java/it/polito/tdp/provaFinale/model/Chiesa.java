@@ -78,7 +78,7 @@ public class Chiesa {
 
 	@Override
 	public String toString() {
-		return "Chiesa: " + nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return nome + ", indirizzo = " + indirizzo;
 	}
 	
 	

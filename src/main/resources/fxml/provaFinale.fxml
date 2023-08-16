@@ -65,16 +65,7 @@
                </children>
             </GridPane>
             <Separator />
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
-               <children>
-                  <Label fx:id="labelLuoghi" disable="true" text="Luoghi" />
-                  <Button fx:id="btnImpostaFiltriLuoghi" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#handleBtnImpostaFiltriLuoghi" text="Imposta filtri" />
-                  <Button fx:id="btnEliminaFiltriLuoghi" disable="true" mnemonicParsing="false" onAction="#handleBtnEliminaFiltriLuoghi" text="Elimina filtri" />
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
+            <Label fx:id="labelLuoghi" disable="true" text="Luoghi" />
             <GridPane fx:id="gridFiltriLuoghi" disable="true" hgap="5.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

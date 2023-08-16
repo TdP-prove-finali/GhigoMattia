@@ -78,7 +78,7 @@ public class Teatro {
 
 	@Override
 	public String toString() {
-		return "Teatro: " + nome + ", indirizzo = " + indirizzo + ", durata visita = " + visita;
+		return nome + ", indirizzo = " + indirizzo;
 	}
 	
 	
