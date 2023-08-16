@@ -14,7 +14,7 @@ public class TestModel {
 //		System.out.println(alberghi.size());
 		
 		m.creaListaAlberghi(100000.0, 0, 1000000.0, false, false, false);
-		Albergo a = m.getAlbergo(523);
+		Albergo a = m.getAlbergo(221);
 		m.setAlbergo(a);
 //		System.out.println(a);
 		
@@ -38,7 +38,7 @@ public class TestModel {
 //		m.creaGrafo();
 		
 		long tic = System.currentTimeMillis();
-		m.creaItinerario(120.0, 1, 1, 2);
+		m.creaItinerario(120.0, 1, 1, 1);
 		long toc = System.currentTimeMillis();
 		List<Luogo> itinerario = m.getItinerarioMigliore();
 		for(int i=0;i<itinerario.size();i++) {

@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `luoghi` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.luoghi: ~177 rows (circa)
+-- Dump dei dati della tabella provafinale.luoghi: ~176 rows (circa)
 DELETE FROM `luoghi`;
 INSERT INTO `luoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(2, 'Locale storico', 'Confetteria Stratta', '45.0674347', '7.6829804', 'Piazza San Carlo 191', 20),
@@ -584,7 +584,6 @@ INSERT INTO `luoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indiri
 	(157, 'Monumento', '\'The Big Testone\' di Andrea Salvatori', '45.0676482897793', '7.68355392654046', 'Piazza San Carlo', 5),
 	(158, 'Luogo particolare', 'Rinascente Torino', '45.06601432086765', '7.682878144341611', 'Via Giuseppe Luigi Lagrange 15', 30),
 	(159, 'Luogo particolare', 'Politecnico di Torino', '45.062470073509076', '7.662362463865162', 'Corso Duca degli Abruzzi 24', 45),
-	(160, 'Luogo particolare', 'Stadio Olimpico Grande Torino', '45.0419740097285', '7.650125327407188', 'Via Filadelfia 96/b', 60),
 	(161, 'Luogo particolare', 'Portone del Melograno', '45.05100918524394', '7.6733239339528865', 'Via Giovanni Argentero 4', 5),
 	(162, 'Luogo particolare', 'Sistema di accumulo San Salvario - The Heat Garden', '45.05099374439463', '7.672279334386338', 'Via Ernesto Lugaro 38', 5),
 	(163, 'Luogo particolare', 'Condominio 25 Verde', '45.04541373482233', '7.679961149219851', 'Via Gabriele Chiabrera 25', 5),
@@ -612,14 +611,14 @@ DROP TABLE IF EXISTS `musei`;
 CREATE TABLE IF NOT EXISTS `musei` (
   `ID` int(11) NOT NULL,
   `Nome` varchar(94) NOT NULL,
-  `Latitudine` varchar(16) NOT NULL,
-  `Longitudine` varchar(16) NOT NULL,
+  `Latitudine` varchar(60) NOT NULL,
+  `Longitudine` varchar(60) NOT NULL,
   `Indirizzo` varchar(39) NOT NULL,
   `Durata` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.musei: ~43 rows (circa)
+-- Dump dei dati della tabella provafinale.musei: ~47 rows (circa)
 DELETE FROM `musei`;
 INSERT INTO `musei` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(26, 'Museo Lavazza', '45.080978', '7.6925657', 'Via Bologna 32', 90),
@@ -666,7 +665,9 @@ INSERT INTO `musei` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Du
 	(81, 'PAV - Parco d\'Arte Vivente', '45.0435781', '7.6642834', 'Via Bruno Giordano 31', 90),
 	(82, 'Pinacoteca della Accademia Albertina di Belle Arti', '45.0673849', '7.6895042', 'Via Accademia Libertina 8', 45),
 	(83, 'Pinacoteca Giovanni e Marella Agnelli', '45.0342752', '7.6675409', 'Via Nizza 230', 90),
-	(84, 'Villa della Regina', '45.0582034', '7.7082832', 'Strada S. Margherita 29/A', 90);
+	(84, 'Villa della Regina', '45.0582034', '7.7082832', 'Strada S. Margherita 29/A', 90),
+	(85, 'Heritage Hub', '45.022033755703255', '7.613298195619902', 'Via Plava 80', 120),
+	(86, 'Stadio Olimpico Grande Torino', '45.0419740097285', '7.650125327407188', 'Via Filadelfia 96/b', 60);
 
 -- Dump della struttura di tabella provafinale.teatri
 DROP TABLE IF EXISTS `teatri`;
@@ -680,7 +681,7 @@ CREATE TABLE IF NOT EXISTS `teatri` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='\r\n';
 
--- Dump dei dati della tabella provafinale.teatri: ~26 rows (circa)
+-- Dump dei dati della tabella provafinale.teatri: ~27 rows (circa)
 DELETE FROM `teatri`;
 INSERT INTO `teatri` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(1, 'Casa del Teatro Ragazzi e Giovani (visitabile solo esternamente)', '45.0415304', '7.6539381', 'Corso Galileo Ferraris 266', 15),
