@@ -14,7 +14,7 @@ public class TestModel {
 //		System.out.println(alberghi.size());
 		
 		m.creaListaAlberghi(100000.0, 0, 1000000.0, false, false, false);
-		Albergo a = m.getAlbergo(523);
+		Albergo a = m.getAlbergo(221);
 		m.setAlbergo(a);
 //		System.out.println(a);
 		
@@ -38,7 +38,7 @@ public class TestModel {
 //		m.creaGrafo();
 		
 		long tic = System.currentTimeMillis();
-		m.creaItinerario(30.0, 2, 1, 1);
+		m.creaItinerario(60.0, 2, 2, 1);
 		long toc = System.currentTimeMillis();
 		List<Luogo> itinerario = m.getItinerarioMigliore();
 		List<Luogo> itinerarioTop = m.getItinerarioMiglioreFiltrato();
@@ -55,7 +55,7 @@ public class TestModel {
 		}
 		System.out.println("\nPosti visitabili: "+(itinerario.size()-2));
 		System.out.println("\nDurata complessiva: "+m.getDurata());
-		System.out.println("\n"+((toc-tic)/1000)+" secondi\n\n");
+		System.out.println("\n"+((toc-tic)/1000)+" secondi\n");
 		
 		for(int i=0;i<itinerarioTop.size();i++) {
 			if(i==0) {

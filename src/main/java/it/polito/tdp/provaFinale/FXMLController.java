@@ -47,6 +47,9 @@ public class FXMLController {
     
     @FXML
     private Button btnImpostaFiltriHotel;
+    
+    @FXML
+    private Button btnCalcolaItinerario;
 
     @FXML
     private ComboBox<String> cmbDistanza;
@@ -77,19 +80,13 @@ public class FXMLController {
     
     @FXML
     private Label labelLuoghi;
-    
-    @FXML
-    private Label labelNumeroHotel;
 
     @FXML
     private TextArea txtArea;
-
-    @FXML
-    private Label txtError;
     
     @FXML
-    void btnInvio(ActionEvent event) {
-    	this.txtError.setText("");
+    void btnImpostaAlbergo(ActionEvent event) {
+    	this.txtArea.clear();
     	Albergo a = this.cmbHotel.getValue();
     	this.cmbTempo.getItems().clear();
     	this.cmbTempo.getItems().add(0.5+" h");
@@ -113,10 +110,11 @@ public class FXMLController {
     		this.btnImpostaFiltriLuoghi.setDisable(false);
     		this.btnEliminaFiltriLuoghi.setDisable(false);
     		this.gridFiltriLuoghi.setDisable(false);
+    		this.btnCalcolaItinerario.setDisable(false);
     		this.model.setAlbergo(a);
     	}
     	else {
-    		this.txtError.setText("Selezionare un albergo!");
+    		this.txtArea.setText("Selezionare un albergo!");
     	}
     }
     
@@ -156,25 +154,31 @@ public class FXMLController {
     		disabili = true;
     	}
     	if(controllo==true) {
+        	this.txtArea.clear();
     		this.cmbHotel.getItems().clear();
     		model.creaListaAlberghi(prezzo, stelle, distanza, bici, disabili, animali);
         	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
         	this.cmbHotel.getItems().addAll(alberghiFiltrati);
         	if(alberghiFiltrati.size()==0) {
-            	this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
+            	this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");
         	}
         	else {
         		this.cmbHotel.getItems().addAll();
-        		this.labelNumeroHotel.setText(model.getAlberghiFiltrati().size()+" alberghi trovati");
+        		this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati");
         	}
+    	}
+    	else {
+        	this.txtArea.clear();
+        	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati");
     	}
     }
     
     @FXML
     void btnEliminaFiltriHotel(ActionEvent event) {
+    	this.txtArea.clear();
     	this.cmbHotel.getItems().clear();
     	this.cmbHotel.getItems().addAll(model.getAllAlberghi());
-    	this.labelNumeroHotel.setText(model.getAllAlberghi().size()+" alberghi trovati");
+    	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati");
     	this.cmbPrezzo.getItems().clear();
     	for(double i=50;i<=250;i+=50) {
     		this.cmbPrezzo.getItems().add(i+" €");
@@ -213,6 +217,11 @@ public class FXMLController {
     	this.cmbMusei.getItems().add("Non interessato");
    		this.cmbMusei.getItems().add("Mediamente interessato");
    		this.cmbMusei.getItems().add("Molto interessato");
+    }
+    
+    @FXML
+    void handleBtnCalcolaItinerario(ActionEvent event) {
+
     }
 
     @FXML
@@ -261,7 +270,8 @@ public class FXMLController {
     	this.model=model;
     	
     	this.cmbHotel.getItems().addAll(model.getAllAlberghi());
-    	this.labelNumeroHotel.setText(model.getAllAlberghi().size()+" alberghi trovati");
+    	this.txtArea.clear();
+    	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati");
     	for(double i=50;i<=250;i+=50) {
     		this.cmbPrezzo.getItems().add(i+" €");
     	}
