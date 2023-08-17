@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-public class Luogo {
+public class tLuogo {
 
 	private String nome;
 	private String tipo;
@@ -12,7 +12,7 @@ public class Luogo {
 	private LatLng coordinate;
 	private int visita;
 	
-	public Luogo(String nome, String tipo, String indirizzo, LatLng coordinate, int visita) {
+	public tLuogo(String nome, String tipo, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -70,7 +70,7 @@ public class Luogo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Luogo other = (Luogo) obj;
+		tLuogo other = (tLuogo) obj;
 		return Objects.equals(coordinate, other.coordinate) && Objects.equals(indirizzo, other.indirizzo)
 				&& Objects.equals(nome, other.nome) && Objects.equals(tipo, other.tipo)
 				&& Objects.equals(visita, other.visita);

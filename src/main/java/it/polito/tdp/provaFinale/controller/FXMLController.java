@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import it.polito.tdp.provaFinale.model.tAlbergo;
-import it.polito.tdp.provaFinale.model.Luogo;
+import it.polito.tdp.provaFinale.model.tLuogo;
 import it.polito.tdp.provaFinale.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -230,8 +230,8 @@ public class FXMLController {
     	double tic = System.currentTimeMillis();
     	model.creaItinerario(tempo*60, intrattenimento, culto, musei);
     	double toc = System.currentTimeMillis();
-    	List<Luogo> itinerarioTop = new ArrayList<>(model.getItinerarioMiglioreFiltrato());
-    	List<Luogo> itinerario = new ArrayList<>(model.getItinerarioMigliore());
+    	List<tLuogo> itinerarioTop = new ArrayList<>(model.getItinerarioMiglioreFiltrato());
+    	List<tLuogo> itinerario = new ArrayList<>(model.getItinerarioMigliore());
     	boolean controllo = false;
     	if(itinerarioTop.size()==0) {
     		this.txtArea.setText("Non è stato possibile creare un itineario che rispetti i filtri inseriti, modificarli e riprovare\n");
@@ -259,7 +259,7 @@ public class FXMLController {
     	if(intrattenimento>=2) {
     		boolean a = false;
     		boolean b = false;
-    		for(Luogo l : itinerarioTop) {
+    		for(tLuogo l : itinerarioTop) {
     			if(l.getTipo().compareTo("Cinema")==0) {
     				a = true;
     			}
@@ -276,7 +276,7 @@ public class FXMLController {
     	}
     	if(culto>=2) {
     		boolean a = false;
-    		for(Luogo l : itinerarioTop) {
+    		for(tLuogo l : itinerarioTop) {
     			if(l.getTipo().compareTo("Chiesa")==0) {
     				a = true;
     			}
@@ -287,7 +287,7 @@ public class FXMLController {
     	}
     	if(musei>=2) {
     		boolean a = false;
-    		for(Luogo l : itinerarioTop) {
+    		for(tLuogo l : itinerarioTop) {
     			if(l.getTipo().compareTo("Museo")==0) {
     				a = true;
     			}

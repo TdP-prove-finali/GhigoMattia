@@ -40,8 +40,8 @@ public class TestModel {
 		double tic = System.currentTimeMillis();
 		m.creaItinerario(30.0, 2, 1, 1);
 		double toc = System.currentTimeMillis();
-		List<Luogo> itinerario = m.getItinerarioMigliore();
-		List<Luogo> itinerarioTop = m.getItinerarioMiglioreFiltrato();
+		List<tLuogo> itinerario = m.getItinerarioMigliore();
+		List<tLuogo> itinerarioTop = m.getItinerarioMiglioreFiltrato();
 		
 		for(int i=0;i<itinerario.size();i++) {
 			if(i==0) {
