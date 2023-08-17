@@ -1,4 +1,4 @@
-package it.polito.tdp.provaFinale.main;
+package it.polito.tdp.provaFinale.controller;
 
 public class Main {
 	public static void main(String[] args) {

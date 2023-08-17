@@ -1,4 +1,4 @@
-package it.polito.tdp.provaFinale.main;
+package it.polito.tdp.provaFinale.controller;
 
 import java.awt.Desktop;
 import java.io.IOException;

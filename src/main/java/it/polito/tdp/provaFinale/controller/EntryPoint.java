@@ -1,4 +1,4 @@
-package it.polito.tdp.provaFinale.main;
+package it.polito.tdp.provaFinale.controller;
 
 import javafx.application.Application;
 import it.polito.tdp.provaFinale.model.Model;
