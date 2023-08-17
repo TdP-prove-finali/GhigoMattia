@@ -3,8 +3,8 @@ package it.polito.tdp.provaFinale.db;
 import java.sql.Connection;
 import java.util.List;
 import it.polito.tdp.provaFinale.model.Albergo;
-import it.polito.tdp.provaFinale.model.Altro;
-import it.polito.tdp.provaFinale.model.Chiesa;
+import it.polito.tdp.provaFinale.model.tAltro;
+import it.polito.tdp.provaFinale.model.tChiesa;
 import it.polito.tdp.provaFinale.model.Museo;
 import it.polito.tdp.provaFinale.model.Teatro;
 import it.polito.tdp.provaFinale.model.Toretto;
@@ -27,14 +27,14 @@ public class TestDAO {
 			}
 			System.out.println(alberghi.size());
 			
-			List<Chiesa> chiese = dao.readChiese();
-			for(Chiesa c : chiese) {
+			List<tChiesa> chiese = dao.readChiese();
+			for(tChiesa c : chiese) {
 				System.out.println(c+"\n");
 			}
 			System.out.println(chiese.size());
 			
-			List<Altro> altri = dao.readLuoghi();
-			for(Altro a : altri) {
+			List<tAltro> altri = dao.readLuoghi();
+			for(tAltro a : altri) {
 				System.out.println(a+"\n");
 			}
 			System.out.println(altri.size());

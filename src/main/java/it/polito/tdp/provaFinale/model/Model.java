@@ -20,17 +20,17 @@ public class Model {
 	private List<Albergo> alberghiFiltrati;
 	private List<Luogo> allLuoghi;
 	private List<Luogo> luoghiVicini; //escludo i luoghi troppo lontani dall'albergo
-	private List<Chiesa> allChiese;
-	private List<Altro> allAltri;
+	private List<tChiesa> allChiese;
+	private List<tAltro> allAltri;
 	private List<Museo> allMusei;
 	private List<Teatro> allTeatri;
 	private List<Toretto> allToretti;
-	private Altro parcoVicino;
+	private tAltro parcoVicino;
 	private Toretto toretVicino;
-	private Altro localeVicino;
-	private Altro cinemaVicino;
+	private tAltro localeVicino;
+	private tAltro cinemaVicino;
 	private Teatro teatroVicino;
-	private Chiesa chiesaVicina;
+	private tChiesa chiesaVicina;
 	private Museo museoVicino;
 	private Luogo partenza;
 	private Luogo arrivo;
@@ -59,13 +59,13 @@ public class Model {
 		
 		//aggiungo le chiese
 		this.allChiese = new ArrayList<>(dao.readChiese());
-		for(Chiesa c : allChiese) {
+		for(tChiesa c : allChiese) {
 			this.allLuoghi.add(new Luogo(c.getNome(), c.getTipo(), c.getIndirizzo(), c.getCoordinate(), c.getVisita()));
 		}
 		
 		//aggiungo altri tipi di luoghi
 		this.allAltri = new ArrayList<>(dao.readLuoghi());
-		for(Altro a : allAltri) {
+		for(tAltro a : allAltri) {
 			this.allLuoghi.add(new Luogo(a.getNome(), a.getTipo(), a.getIndirizzo(), a.getCoordinate(), a.getVisita()));
 		}
 		
@@ -166,8 +166,8 @@ public class Model {
 		this.albergoScelto = albergo;
 		
 		double distanzaChiesa = Double.MAX_VALUE;
-		Chiesa chiesaVicina = null;
-		for(Chiesa c : this.allChiese) {
+		tChiesa chiesaVicina = null;
+		for(tChiesa c : this.allChiese) {
 			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER)<distanzaChiesa) {
 				distanzaChiesa = LatLngTool.distance(albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER);
 				chiesaVicina = c;
@@ -176,8 +176,8 @@ public class Model {
 		this.chiesaVicina = chiesaVicina;
 		
 		double distanzaCinema = Double.MAX_VALUE;
-		Altro cinemaVicino = null;
-		for(Altro a : this.allAltri) {
+		tAltro cinemaVicino = null;
+		for(tAltro a : this.allAltri) {
 			if(a.getTipo().compareTo("Cinema")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaCinema) {
 				distanzaCinema = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				cinemaVicino = a;
@@ -186,8 +186,8 @@ public class Model {
 		this.cinemaVicino = cinemaVicino;
 		
 		double distanzaLocale = Double.MAX_VALUE;
-		Altro localeVicino = null;
-		for(Altro a : this.allAltri) {
+		tAltro localeVicino = null;
+		for(tAltro a : this.allAltri) {
 			if(a.getTipo().compareTo("Locale storico")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaLocale) {
 				distanzaLocale = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				localeVicino = a;
@@ -206,8 +206,8 @@ public class Model {
 		this.museoVicino = museoVicino;
 		
 		double distanzaParco = Double.MAX_VALUE;
-		Altro parcoVicino = null;
-		for(Altro a : this.allAltri) {
+		tAltro parcoVicino = null;
+		for(tAltro a : this.allAltri) {
 			if(a.getTipo().compareTo("Parco")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaParco) {
 				distanzaParco = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				parcoVicino = a;
@@ -782,15 +782,15 @@ public class Model {
 		return null;
 	}
 	
-	public Chiesa getChiesa(){
+	public tChiesa getChiesa(){
 		return this.chiesaVicina;
 	}
 	
-	public Altro getCinema() {
+	public tAltro getCinema() {
 		return this.cinemaVicino;
 	}
 	
-	public Altro getLocale(){
+	public tAltro getLocale(){
 		return this.localeVicino;
 	}
 	
@@ -798,7 +798,7 @@ public class Model {
 		return this.museoVicino;
 	}
 	
-	public Altro getParco(){
+	public tAltro getParco(){
 		return this.parcoVicino;
 	}
 	
