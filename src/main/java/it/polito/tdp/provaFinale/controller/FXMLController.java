@@ -1,4 +1,4 @@
-package it.polito.tdp.provaFinale;
+package it.polito.tdp.provaFinale.controller;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import it.polito.tdp.provaFinale.model.Albergo;
 import it.polito.tdp.provaFinale.model.Luogo;
 import it.polito.tdp.provaFinale.model.Model;
