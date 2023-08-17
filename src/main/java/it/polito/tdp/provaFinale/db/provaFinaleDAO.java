@@ -10,9 +10,9 @@ import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
 
-import it.polito.tdp.provaFinale.model.tAlbergo;
-import it.polito.tdp.provaFinale.model.tAltro;
-import it.polito.tdp.provaFinale.model.tChiesa;
+import it.polito.tdp.provaFinale.model.Albergo;
+import it.polito.tdp.provaFinale.model.Altro;
+import it.polito.tdp.provaFinale.model.Chiesa;
 import it.polito.tdp.provaFinale.model.Museo;
 import it.polito.tdp.provaFinale.model.Teatro;
 import it.polito.tdp.provaFinale.model.Toretto;
@@ -21,11 +21,11 @@ public class provaFinaleDAO {
 	
 	private LatLng coordinateCentro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
-	public List<tAlbergo> readAlberghi() {
+	public List<Albergo> readAlberghi() {
 
 		final String sql = "SELECT a.ID, a.Denominazione, a.Indirizzo, a.Mezza_pensione_alta_stagione, a.Stelle, a.Cap, a.Comune, a.Provincia, a.Latitudine, a.Longitudine, a.Bike_friendly, a.Lingue, a.Disabili, a.Animali_domestici "
 				+ "FROM alberghi a";
-		List<tAlbergo> alberghi = new ArrayList<tAlbergo>();
+		List<Albergo> alberghi = new ArrayList<Albergo>();
 
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -34,7 +34,7 @@ public class provaFinaleDAO {
 
 			while (rs.next()) {
 				LatLng coord = new LatLng(rs.getDouble("a.Latitudine"), rs.getDouble("a.Longitudine"));
-				tAlbergo a = new tAlbergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(coordinateCentro, coord, LengthUnit.KILOMETER));
+				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(coordinateCentro, coord, LengthUnit.KILOMETER));
 				alberghi.add(a);
 			}
 
@@ -49,11 +49,11 @@ public class provaFinaleDAO {
 		return alberghi;
 	}
 
-	public List<tChiesa> readChiese() {
+	public List<Chiesa> readChiese() {
 
 		final String sql = "SELECT c.Nome, c.Indirizzo, c.Latitudine, c.Longitudine, c.Durata "
 				+ "FROM chiese c";
-		List<tChiesa> chiese = new ArrayList<tChiesa>();
+		List<Chiesa> chiese = new ArrayList<Chiesa>();
 
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -61,7 +61,7 @@ public class provaFinaleDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				tChiesa c = new tChiesa(rs.getString("c.Nome"), rs.getString("c.Indirizzo"), new LatLng(rs.getDouble("c.Latitudine"), rs.getDouble("c.Longitudine")), rs.getInt("c.Durata"));
+				Chiesa c = new Chiesa(rs.getString("c.Nome"), rs.getString("c.Indirizzo"), new LatLng(rs.getDouble("c.Latitudine"), rs.getDouble("c.Longitudine")), rs.getInt("c.Durata"));
 				chiese.add(c);
 			}
 
@@ -76,11 +76,11 @@ public class provaFinaleDAO {
 		return chiese;
 	}
 	
-	public List<tAltro> readLuoghi() {
+	public List<Altro> readLuoghi() {
 
 		final String sql = "SELECT l.Nome, l.Tipo, l.Indirizzo, l.Latitudine, l.Longitudine, l.Durata "
 				+ "FROM luoghi l";
-		List<tAltro> luoghi = new ArrayList<tAltro>();
+		List<Altro> luoghi = new ArrayList<Altro>();
 
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -88,7 +88,7 @@ public class provaFinaleDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				tAltro l = new tAltro(rs.getString("l.Nome"), rs.getString("l.Tipo"), rs.getString("l.Indirizzo"), new LatLng(rs.getDouble("l.Latitudine"), rs.getDouble("l.Longitudine")), rs.getInt("l.Durata"));
+				Altro l = new Altro(rs.getString("l.Nome"), rs.getString("l.Tipo"), rs.getString("l.Indirizzo"), new LatLng(rs.getDouble("l.Latitudine"), rs.getDouble("l.Longitudine")), rs.getInt("l.Durata"));
 				luoghi.add(l);
 			}
 

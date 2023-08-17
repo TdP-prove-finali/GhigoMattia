@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-public class tAltro implements Comparable<tAltro>{
+public class Altro implements Comparable<Altro>{
 
 	private String nome;
 	private String tipo;
@@ -12,7 +12,7 @@ public class tAltro implements Comparable<tAltro>{
 	private LatLng coordinate;
 	private int visita;
 	
-	public tAltro(String nome, String tipo, String indirizzo, LatLng coordinate, int visita) {
+	public Altro(String nome, String tipo, String indirizzo, LatLng coordinate, int visita) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -70,7 +70,7 @@ public class tAltro implements Comparable<tAltro>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		tAltro other = (tAltro) obj;
+		Altro other = (Altro) obj;
 		return Objects.equals(coordinate, other.coordinate) && Objects.equals(indirizzo, other.indirizzo)
 				&& Objects.equals(nome, other.nome) && Objects.equals(tipo, other.tipo)
 				&& Objects.equals(visita, other.visita);
@@ -82,7 +82,7 @@ public class tAltro implements Comparable<tAltro>{
 	}
 
 	@Override
-	public int compareTo(tAltro o) {
+	public int compareTo(Altro o) {
 		return this.nome.compareTo(o.nome);
 	}
 	

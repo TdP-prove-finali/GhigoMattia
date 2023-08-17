@@ -2,9 +2,10 @@ package it.polito.tdp.provaFinale.db;
 
 import java.sql.Connection;
 import java.util.List;
-import it.polito.tdp.provaFinale.model.tAlbergo;
-import it.polito.tdp.provaFinale.model.tAltro;
-import it.polito.tdp.provaFinale.model.tChiesa;
+
+import it.polito.tdp.provaFinale.model.Albergo;
+import it.polito.tdp.provaFinale.model.Altro;
+import it.polito.tdp.provaFinale.model.Chiesa;
 import it.polito.tdp.provaFinale.model.Museo;
 import it.polito.tdp.provaFinale.model.Teatro;
 import it.polito.tdp.provaFinale.model.Toretto;
@@ -20,21 +21,21 @@ public class TestDAO {
 			
 			provaFinaleDAO dao = new provaFinaleDAO() ;
 			
-			List<tAlbergo> alberghi = dao.readAlberghi();
+			List<Albergo> alberghi = dao.readAlberghi();
 			alberghi.sort(null);
-			for(tAlbergo a : alberghi) {
+			for(Albergo a : alberghi) {
 				System.out.println(a+"\n");
 			}
 			System.out.println(alberghi.size());
 			
-			List<tChiesa> chiese = dao.readChiese();
-			for(tChiesa c : chiese) {
+			List<Chiesa> chiese = dao.readChiese();
+			for(Chiesa c : chiese) {
 				System.out.println(c+"\n");
 			}
 			System.out.println(chiese.size());
 			
-			List<tAltro> altri = dao.readLuoghi();
-			for(tAltro a : altri) {
+			List<Altro> altri = dao.readLuoghi();
+			for(Altro a : altri) {
 				System.out.println(a+"\n");
 			}
 			System.out.println(altri.size());

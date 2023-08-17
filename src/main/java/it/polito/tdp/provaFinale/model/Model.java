@@ -9,43 +9,42 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
+
 import it.polito.tdp.provaFinale.db.provaFinaleDAO;
 
 public class Model {
 
 	private provaFinaleDAO dao;
 	
-	private Graph<tLuogo, DefaultWeightedEdge> grafo;
-	private List<tAlbergo> allAlberghi;
-	private List<tAlbergo> alberghiFiltrati;
-	private List<tLuogo> allLuoghi;
-	private List<tLuogo> luoghiVicini; //escludo i luoghi troppo lontani dall'albergo
-	private List<tChiesa> allChiese;
-	private List<tAltro> allAltri;
+	private Graph<Luogo, DefaultWeightedEdge> grafo;
+	private List<Albergo> allAlberghi;
+	private List<Albergo> alberghiFiltrati;
+	private List<Luogo> allLuoghi;
+	private List<Luogo> luoghiVicini; //escludo i luoghi troppo lontani dall'albergo
+	private List<Chiesa> allChiese;
+	private List<Altro> allAltri;
 	private List<Museo> allMusei;
 	private List<Teatro> allTeatri;
 	private List<Toretto> allToretti;
-	private tAltro parcoVicino;
+	private Altro parcoVicino;
 	private Toretto toretVicino;
-	private tAltro localeVicino;
-	private tAltro cinemaVicino;
+	private Altro localeVicino;
+	private Altro cinemaVicino;
 	private Teatro teatroVicino;
-	private tChiesa chiesaVicina;
+	private Chiesa chiesaVicina;
 	private Museo museoVicino;
-	private tLuogo partenza;
-	private tLuogo arrivo;
 	
 	private LatLng coordinateCentro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
-	private tAlbergo albergoScelto;
+	private Albergo albergoScelto;
 	private double tempoDisponibile;
 	private int stelleCulto;
 	private int stelleIntrattenimento;
 	private int stelleMusei;
 	
-	private List<tLuogo> itinerarioMigliore;
+	private List<Luogo> itinerarioMigliore;
 	private double durata;
-	private List<tLuogo> itinerarioMiglioreFiltrato;
+	private List<Luogo> itinerarioMiglioreFiltrato;
 	private double durataFiltrata;
 	
 	public Model() {
@@ -59,32 +58,32 @@ public class Model {
 		
 		//aggiungo le chiese
 		this.allChiese = new ArrayList<>(dao.readChiese());
-		for(tChiesa c : allChiese) {
-			this.allLuoghi.add(new tLuogo(c.getNome(), c.getTipo(), c.getIndirizzo(), c.getCoordinate(), c.getVisita()));
+		for(Chiesa c : allChiese) {
+			this.allLuoghi.add(new Luogo(c.getNome(), c.getTipo(), c.getIndirizzo(), c.getCoordinate(), c.getVisita()));
 		}
 		
 		//aggiungo altri tipi di luoghi
 		this.allAltri = new ArrayList<>(dao.readLuoghi());
-		for(tAltro a : allAltri) {
-			this.allLuoghi.add(new tLuogo(a.getNome(), a.getTipo(), a.getIndirizzo(), a.getCoordinate(), a.getVisita()));
+		for(Altro a : allAltri) {
+			this.allLuoghi.add(new Luogo(a.getNome(), a.getTipo(), a.getIndirizzo(), a.getCoordinate(), a.getVisita()));
 		}
 		
 		//aggiungo i musei
 		this.allMusei = new ArrayList<>(dao.readMusei());
 		for(Museo m : allMusei) {
-			this.allLuoghi.add(new tLuogo(m.getNome(), m.getTipo(), m.getIndirizzo(), m.getCoordinate(), m.getVisita()));
+			this.allLuoghi.add(new Luogo(m.getNome(), m.getTipo(), m.getIndirizzo(), m.getCoordinate(), m.getVisita()));
 		}
 		
 		//aggiungo i teatri
 		this.allTeatri = new ArrayList<>(dao.readTeatri());
 		for(Teatro t : allTeatri) {
-			this.allLuoghi.add(new tLuogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
+			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
 		}
 		
 		//aggiungo i toret
 		this.allToretti = new ArrayList<>(dao.readToretti());
 		for(Toretto t : allToretti) {
-			this.allLuoghi.add(new tLuogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
+			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
 		}
 	}
 	
@@ -95,14 +94,14 @@ public class Model {
 		if(bici==true) {
 			if(disabili==true) {
 				if(animali==true) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -111,14 +110,14 @@ public class Model {
 			}
 			if(disabili==false) {
 				if(animali==true) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -129,14 +128,14 @@ public class Model {
 		if(bici==false) {
 			if(disabili==true) {
 				if(animali==true) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -145,14 +144,14 @@ public class Model {
 			}
 			if(disabili==false) {
 				if(animali==true) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(tAlbergo a : this.allAlberghi) {
+					for(Albergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -162,12 +161,12 @@ public class Model {
 		}
 	}
 	
-	public void setAlbergo(tAlbergo albergo) {
+	public void setAlbergo(Albergo albergo) {
 		this.albergoScelto = albergo;
 		
 		double distanzaChiesa = Double.MAX_VALUE;
-		tChiesa chiesaVicina = null;
-		for(tChiesa c : this.allChiese) {
+		Chiesa chiesaVicina = null;
+		for(Chiesa c : this.allChiese) {
 			if(LatLngTool.distance(this.albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER)<distanzaChiesa) {
 				distanzaChiesa = LatLngTool.distance(albergoScelto.getCoordinate(), c.getCoordinate(), LengthUnit.KILOMETER);
 				chiesaVicina = c;
@@ -176,8 +175,8 @@ public class Model {
 		this.chiesaVicina = chiesaVicina;
 		
 		double distanzaCinema = Double.MAX_VALUE;
-		tAltro cinemaVicino = null;
-		for(tAltro a : this.allAltri) {
+		Altro cinemaVicino = null;
+		for(Altro a : this.allAltri) {
 			if(a.getTipo().compareTo("Cinema")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaCinema) {
 				distanzaCinema = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				cinemaVicino = a;
@@ -186,8 +185,8 @@ public class Model {
 		this.cinemaVicino = cinemaVicino;
 		
 		double distanzaLocale = Double.MAX_VALUE;
-		tAltro localeVicino = null;
-		for(tAltro a : this.allAltri) {
+		Altro localeVicino = null;
+		for(Altro a : this.allAltri) {
 			if(a.getTipo().compareTo("Locale storico")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaLocale) {
 				distanzaLocale = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				localeVicino = a;
@@ -206,8 +205,8 @@ public class Model {
 		this.museoVicino = museoVicino;
 		
 		double distanzaParco = Double.MAX_VALUE;
-		tAltro parcoVicino = null;
-		for(tAltro a : this.allAltri) {
+		Altro parcoVicino = null;
+		for(Altro a : this.allAltri) {
 			if(a.getTipo().compareTo("Parco")==0 && LatLngTool.distance(this.albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER)<distanzaParco) {
 				distanzaParco = LatLngTool.distance(albergoScelto.getCoordinate(), a.getCoordinate(), LengthUnit.KILOMETER);
 				parcoVicino = a;
@@ -241,7 +240,7 @@ public class Model {
 
 		//creo la lista contente i luoghi vicini all'albergo
 		this.luoghiVicini = new ArrayList<>();
-		for(tLuogo l : this.allLuoghi) {
+		for(Luogo l : this.allLuoghi) {
 			//parchi, toret e locali non vengono aggiunti al grafo
 			if(l.getTipo().compareTo("Parco")!=0 && l.getTipo().compareTo("Toret")!=0 && l.getTipo().compareTo("Locale storico")!=0) {
 				//luoghi aggiunti in modo diverso in base alla distanza dell'albergo dal centro
@@ -328,8 +327,8 @@ public class Model {
 		}
 		
 		//aggiungo, al grafo, l'albergo come punto di partenza e di arrivo
-		this.partenza = new tLuogo(this.albergoScelto.getNome(), "PARTENZA", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
-		this.arrivo = new tLuogo(this.albergoScelto.getNome(), "ARRIVO", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		Luogo partenza = new Luogo(this.albergoScelto.getNome(), "PARTENZA", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
+		Luogo arrivo = new Luogo(this.albergoScelto.getNome(), "ARRIVO", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
 		this.luoghiVicini.add(partenza);
 		this.luoghiVicini.add(arrivo);
 		
@@ -337,8 +336,8 @@ public class Model {
 		Graphs.addAllVertices(this.grafo, this.luoghiVicini);
 
 		//aggiungo gli archi al grafo
-		for(tLuogo l1 : this.grafo.vertexSet()) {
-			for(tLuogo l2 : this.grafo.vertexSet()) {
+		for(Luogo l1 : this.grafo.vertexSet()) {
+			for(Luogo l2 : this.grafo.vertexSet()) {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
 					//non vengono collegati luoghi simili o troppo lontani
@@ -373,12 +372,22 @@ public class Model {
 		this.itinerarioMiglioreFiltrato = new ArrayList<>();
 		this.durataFiltrata = Double.MAX_VALUE;
 		
-		List<tLuogo> parziale = new ArrayList<>();
-		parziale.add(this.partenza);
-		ricorsione(parziale, this.getAdiacenti(partenza), 0.0, false, false, 0, false);
+		List<Luogo> parziale = new ArrayList<>();
+		Luogo partenza = null;
+		Luogo arrivo = null;
+		for(Luogo l : this.luoghiVicini) {
+			if(l.getTipo().compareTo("PARTENZA")==0) {
+				partenza=l;
+			}
+			else if(l.getTipo().compareTo("ARRIVO")==0) {
+				arrivo = l;
+			}
+		}
+		parziale.add(partenza);
+		ricorsione(parziale, this.getAdiacenti(partenza), arrivo, 0.0, false, false, 0, false);
 	}
 	
-	private void ricorsione(List<tLuogo> parziale, List<tLuogo> adiacenti, double cont, boolean cinema, boolean teatri, int chiese, boolean musei) {
+	private void ricorsione(List<Luogo> parziale, List<Luogo> adiacenti, Luogo arrivo, double cont, boolean cinema, boolean teatri, int chiese, boolean musei) {
 		if(parziale.get(parziale.size()-1).equals(arrivo)) {
 			if((parziale.size()>this.itinerarioMigliore.size() || (parziale.size()==this.itinerarioMigliore.size() && cont<this.durata))) {
 				this.itinerarioMigliore = new ArrayList<>(parziale);
@@ -623,7 +632,7 @@ public class Model {
 			return;
 		}
 			
-		for(tLuogo l : adiacenti) {
+		for(Luogo l : adiacenti) {
 			if(!parziale.contains(l)) {
 				if(l.getTipo().compareTo("Teatro")==0) {
 					if(teatri==false) {
@@ -640,7 +649,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							teatri=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), arrivo, cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							teatri=false;
 							parziale.remove(l);
 						}
@@ -664,7 +673,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							cinema=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), arrivo, cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							cinema=false;
 							parziale.remove(l);
 						}
@@ -684,7 +693,7 @@ public class Model {
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
 						chiese++;
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
+						ricorsione(parziale, this.getAdiacenti(l), arrivo, cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 						chiese--;
 						parziale.remove(l);
 					}
@@ -704,7 +713,7 @@ public class Model {
 						if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 							parziale.add(l);
 							musei=true;
-							ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
+							ricorsione(parziale, this.getAdiacenti(l), arrivo, cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 							musei=false;
 							parziale.remove(l);
 						}
@@ -723,7 +732,7 @@ public class Model {
 					}
 					if((cont+precedente+l.getVisita()+successivo)<=this.tempoDisponibile){
 						parziale.add(l);
-						ricorsione(parziale, this.getAdiacenti(l), cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
+						ricorsione(parziale, this.getAdiacenti(l), arrivo, cont+precedente+l.getVisita(), cinema, teatri, chiese, musei);
 						parziale.remove(l);
 					}
 				}
@@ -731,13 +740,13 @@ public class Model {
 		}
 	}
 
-	public List<tLuogo> getAdiacenti(tLuogo partenza) {
-		List<tLuogo> adiacenti = Graphs.successorListOf(this.grafo, partenza);
+	public List<Luogo> getAdiacenti(Luogo partenza) {
+		List<Luogo> adiacenti = Graphs.successorListOf(this.grafo, partenza);
 		return adiacenti;
 	}
 	
 	
-	public List<tLuogo> getItinerarioMigliore() {
+	public List<Luogo> getItinerarioMigliore() {
 		return itinerarioMigliore;
 	}
 	
@@ -750,7 +759,7 @@ public class Model {
 		}
 	}
 	
-	public List<tLuogo> getItinerarioMiglioreFiltrato() {
+	public List<Luogo> getItinerarioMiglioreFiltrato() {
 		return itinerarioMiglioreFiltrato;
 	}
 	
@@ -763,18 +772,18 @@ public class Model {
 		}
 	}
 	
-	public List<tAlbergo> getAllAlberghi() {
+	public List<Albergo> getAllAlberghi() {
 		this.allAlberghi.sort(null);
 		return allAlberghi;
 	}
 
-	public List<tAlbergo> getAlberghiFiltrati() {
+	public List<Albergo> getAlberghiFiltrati() {
 		this.alberghiFiltrati.sort(null);
 		return alberghiFiltrati;
 	}
 	
-	public tAlbergo getAlbergo(Integer i) {
-		for(tAlbergo a : this.allAlberghi) {
+	public Albergo getAlbergo(Integer i) {
+		for(Albergo a : this.allAlberghi) {
 			if(a.getId()==i) {
 				return a;
 			}
@@ -782,15 +791,15 @@ public class Model {
 		return null;
 	}
 	
-	public tChiesa getChiesa(){
+	public Chiesa getChiesa(){
 		return this.chiesaVicina;
 	}
 	
-	public tAltro getCinema() {
+	public Altro getCinema() {
 		return this.cinemaVicino;
 	}
 	
-	public tAltro getLocale(){
+	public Altro getLocale(){
 		return this.localeVicino;
 	}
 	
@@ -798,7 +807,7 @@ public class Model {
 		return this.museoVicino;
 	}
 	
-	public tAltro getParco(){
+	public Altro getParco(){
 		return this.parcoVicino;
 	}
 	

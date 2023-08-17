@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-public class tAlbergo implements Comparable<tAlbergo>{
+public class Albergo implements Comparable<Albergo>{
 
 	private int id;
 	private String nome;
@@ -17,7 +17,7 @@ public class tAlbergo implements Comparable<tAlbergo>{
 	private boolean animali;
 	private double distanzaCentro;
 	
-	public tAlbergo(int id, String nome, String indirizzo, double prezzo, int stelle, int cap, String comune,
+	public Albergo(int id, String nome, String indirizzo, double prezzo, int stelle, int cap, String comune,
 			String provincia, LatLng coordinate, int bici,
 			String lingue, int disabili, int animali, double distanzaCentro) {
 		super();
@@ -97,7 +97,7 @@ public class tAlbergo implements Comparable<tAlbergo>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		tAlbergo other = (tAlbergo) obj;
+		Albergo other = (Albergo) obj;
 		return animali == other.animali && bici == other.bici
 				&& Objects.equals(coordinate, other.coordinate)
 				&& disabili == other.disabili
@@ -114,7 +114,7 @@ public class tAlbergo implements Comparable<tAlbergo>{
 	}
 
 	@Override
-	public int compareTo(tAlbergo o) {
+	public int compareTo(Albergo o) {
 		return this.nome.compareTo(o.nome);
 	}
 	
