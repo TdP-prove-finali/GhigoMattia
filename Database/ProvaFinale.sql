@@ -24,7 +24,7 @@ USE `provafinale`;
 DROP TABLE IF EXISTS `alberghi`;
 CREATE TABLE IF NOT EXISTS `alberghi` (
   `ID` int(11) NOT NULL,
-  `Denominazione` varchar(50) NOT NULL,
+  `Nome` varchar(50) NOT NULL,
   `Indirizzo` varchar(47) NOT NULL,
   `Mezza_pensione_alta_stagione` double DEFAULT NULL,
   `Stelle` int(11) NOT NULL DEFAULT 0,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `alberghi` (
 
 -- Dump dei dati della tabella provafinale.alberghi: ~179 rows (circa)
 DELETE FROM `alberghi`;
-INSERT INTO `alberghi` (`ID`, `Denominazione`, `Indirizzo`, `Mezza_pensione_alta_stagione`, `Stelle`, `Cap`, `Comune`, `Provincia`, `Latitudine`, `Longitudine`, `Bike_friendly`, `Lingue`, `Disabili`, `Animali_domestici`) VALUES
+INSERT INTO `alberghi` (`ID`, `Nome`, `Indirizzo`, `Mezza_pensione_alta_stagione`, `Stelle`, `Cap`, `Comune`, `Provincia`, `Latitudine`, `Longitudine`, `Bike_friendly`, `Lingue`, `Disabili`, `Animali_domestici`) VALUES
 	(11, 'Eco Art Hotel Statuto', 'VIA PRINCIPI D\'ACAJA 17', 75, 2, 10138, 'TORINO', 'TO', '45.075889', '7.664158', 1, 'Inglese, Francese, Spagnolo', 0, 1),
 	(18, 'Centro Hotel', 'VIA PRINCIPE TOMMASO 12', 96, 3, 10125, 'TORINO', 'TO', '45.0592537', '7.6819466', 0, 'Inglese', 0, 1),
 	(19, 'Luna Lo Squalo 2', 'VIA VERONESE 344', 65, 1, 10100, 'TORINO', 'TO', '45.112041', '7.6603869', 0, 'Francese', 1, 1),
@@ -618,7 +618,7 @@ CREATE TABLE IF NOT EXISTS `musei` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.musei: ~47 rows (circa)
+-- Dump dei dati della tabella provafinale.musei: ~45 rows (circa)
 DELETE FROM `musei`;
 INSERT INTO `musei` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(26, 'Museo Lavazza', '45.080978', '7.6925657', 'Via Bologna 32', 90),
