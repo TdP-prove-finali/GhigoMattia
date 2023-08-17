@@ -89,17 +89,17 @@ public class FXMLController {
     		this.cmbTempo.getItems().add(i+" h");
     	}
     	this.cmbCulto.getItems().clear();
-    	this.cmbCulto.getItems().add("Non interessato");
+    	this.cmbCulto.getItems().add("Molto interessato");
    		this.cmbCulto.getItems().add("Mediamente interessato");
-   		this.cmbCulto.getItems().add("Molto interessato");
+   		this.cmbCulto.getItems().add("Non interessato");
     	this.cmbIntrattenimento.getItems().clear();
-    	this.cmbIntrattenimento.getItems().add("Non interessato");
+    	this.cmbIntrattenimento.getItems().add("Molto interessato");
    		this.cmbIntrattenimento.getItems().add("Mediamente interessato");
-   		this.cmbIntrattenimento.getItems().add("Molto interessato");
+   		this.cmbIntrattenimento.getItems().add("Non interessato");
     	this.cmbMusei.getItems().clear();
-    	this.cmbMusei.getItems().add("Non interessato");
+    	this.cmbMusei.getItems().add("Molto interessato");
    		this.cmbMusei.getItems().add("Mediamente interessato");
-   		this.cmbMusei.getItems().add("Molto interessato");
+   		this.cmbMusei.getItems().add("Non interessato");
     	if(a!=null) {
     		this.labelLuoghi.setDisable(false);
     		this.gridFiltriLuoghi.setDisable(false);
@@ -366,14 +366,14 @@ public class FXMLController {
     		this.cmbTempo.getItems().add(i+" h");
     	}
     	
-    	this.cmbCulto.getItems().add("Non interessato");
-    	this.cmbCulto.getItems().add("Mediamente interessato");
     	this.cmbCulto.getItems().add("Molto interessato");
-    	this.cmbIntrattenimento.getItems().add("Non interessato");
-    	this.cmbIntrattenimento.getItems().add("Mediamente interessato");
+    	this.cmbCulto.getItems().add("Mediamente interessato");
+    	this.cmbCulto.getItems().add("Non interessato");
     	this.cmbIntrattenimento.getItems().add("Molto interessato");
-   		this.cmbMusei.getItems().add("Non interessato");
-   		this.cmbMusei.getItems().add("Mediamente interessato");
+    	this.cmbIntrattenimento.getItems().add("Mediamente interessato");
+    	this.cmbIntrattenimento.getItems().add("Non interessato");
    		this.cmbMusei.getItems().add("Molto interessato");
+   		this.cmbMusei.getItems().add("Mediamente interessato");
+   		this.cmbMusei.getItems().add("Non interessato");
     }
 }
