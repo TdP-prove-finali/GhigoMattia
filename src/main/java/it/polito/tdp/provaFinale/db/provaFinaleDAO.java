@@ -19,7 +19,7 @@ import it.polito.tdp.provaFinale.model.Toretto;
 
 public class provaFinaleDAO {
 	
-	private LatLng centro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
+	private LatLng coordinateCentro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
 	public List<Albergo> readAlberghi() {
 
@@ -34,7 +34,7 @@ public class provaFinaleDAO {
 
 			while (rs.next()) {
 				LatLng coord = new LatLng(rs.getDouble("a.Latitudine"), rs.getDouble("a.Longitudine"));
-				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(centro, coord, LengthUnit.KILOMETER));
+				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(coordinateCentro, coord, LengthUnit.KILOMETER));
 				alberghi.add(a);
 			}
 
