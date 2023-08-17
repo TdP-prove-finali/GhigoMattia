@@ -17,9 +17,7 @@ public class Albergo implements Comparable<Albergo>{
 	private boolean animali;
 	private double distanzaCentro;
 	
-	public Albergo(int id, String nome, String indirizzo, double prezzo, int stelle, int cap, String comune,
-			String provincia, LatLng coordinate, int bici,
-			String lingue, int disabili, int animali, double distanzaCentro) {
+	public Albergo(int id, String nome, String indirizzo, double prezzo, int stelle, LatLng coordinate, int bici, int disabili, int animali, double distanzaCentro) {
 		super();
 		this.id = id;
 		this.nome = nome;
