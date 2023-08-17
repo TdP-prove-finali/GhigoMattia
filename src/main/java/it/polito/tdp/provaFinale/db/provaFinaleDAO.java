@@ -76,10 +76,10 @@ public class provaFinaleDAO {
 		return chiese;
 	}
 	
-	public List<Altro> readLuoghi() {
+	public List<Altro> readAltriLuoghi() {
 
 		final String sql = "SELECT l.Nome, l.Tipo, l.Indirizzo, l.Latitudine, l.Longitudine, l.Durata "
-				+ "FROM luoghi l";
+				+ "FROM altriluoghi l";
 		List<Altro> luoghi = new ArrayList<Altro>();
 
 		try {

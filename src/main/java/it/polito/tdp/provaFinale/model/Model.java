@@ -59,7 +59,7 @@ public class Model {
 		}
 		
 		//aggiungo altri tipi di luoghi
-		this.allAltri = new ArrayList<>(dao.readLuoghi());
+		this.allAltri = new ArrayList<>(dao.readAltriLuoghi());
 		for(Altro a : allAltri) {
 			this.allLuoghi.add(new Luogo(a.getNome(), a.getTipo(), a.getIndirizzo(), a.getCoordinate(), a.getVisita()));
 		}

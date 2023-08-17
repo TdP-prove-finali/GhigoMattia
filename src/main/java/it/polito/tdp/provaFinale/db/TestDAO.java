@@ -34,7 +34,7 @@ public class TestDAO {
 			}
 			System.out.println(chiese.size());
 			
-			List<Altro> altri = dao.readLuoghi();
+			List<Altro> altri = dao.readAltriLuoghi();
 			for(Altro a : altri) {
 				System.out.println(a+"\n");
 			}
