@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import it.polito.tdp.provaFinale.model.Albergo;
+import it.polito.tdp.provaFinale.model.tAlbergo;
 import it.polito.tdp.provaFinale.model.Luogo;
 import it.polito.tdp.provaFinale.model.Model;
 import javafx.event.ActionEvent;
@@ -50,7 +50,7 @@ public class FXMLController {
     private ComboBox<String> cmbDistanza;
 
     @FXML
-    private ComboBox<Albergo> cmbHotel;
+    private ComboBox<tAlbergo> cmbHotel;
 
     @FXML
     private ComboBox<String> cmbPrezzo;
@@ -82,7 +82,7 @@ public class FXMLController {
     @FXML
     void btnImpostaAlbergo(ActionEvent event) {
     	this.txtArea.clear();
-    	Albergo a = this.cmbHotel.getValue();
+    	tAlbergo a = this.cmbHotel.getValue();
     	this.cmbTempo.getItems().clear();
     	this.cmbTempo.getItems().add(0.5+" h");
     	for(int i=1;i<=12;i++) {
@@ -150,7 +150,7 @@ public class FXMLController {
         	this.txtArea.clear();
     		this.cmbHotel.getItems().clear();
     		model.creaListaAlberghi(prezzo, stelle, distanza, bici, disabili, animali);
-        	List<Albergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
+        	List<tAlbergo> alberghiFiltrati = new ArrayList<>(model.getAlberghiFiltrati());
         	this.cmbHotel.getItems().addAll(alberghiFiltrati);
         	if(alberghiFiltrati.size()==0) {
             	this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati, modificare i filtri");

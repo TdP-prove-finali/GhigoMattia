@@ -10,7 +10,7 @@ import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
 
-import it.polito.tdp.provaFinale.model.Albergo;
+import it.polito.tdp.provaFinale.model.tAlbergo;
 import it.polito.tdp.provaFinale.model.tAltro;
 import it.polito.tdp.provaFinale.model.tChiesa;
 import it.polito.tdp.provaFinale.model.Museo;
@@ -21,11 +21,11 @@ public class provaFinaleDAO {
 	
 	private LatLng coordinateCentro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
-	public List<Albergo> readAlberghi() {
+	public List<tAlbergo> readAlberghi() {
 
 		final String sql = "SELECT a.ID, a.Denominazione, a.Indirizzo, a.Mezza_pensione_alta_stagione, a.Stelle, a.Cap, a.Comune, a.Provincia, a.Latitudine, a.Longitudine, a.Bike_friendly, a.Lingue, a.Disabili, a.Animali_domestici "
 				+ "FROM alberghi a";
-		List<Albergo> alberghi = new ArrayList<Albergo>();
+		List<tAlbergo> alberghi = new ArrayList<tAlbergo>();
 
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -34,7 +34,7 @@ public class provaFinaleDAO {
 
 			while (rs.next()) {
 				LatLng coord = new LatLng(rs.getDouble("a.Latitudine"), rs.getDouble("a.Longitudine"));
-				Albergo a = new Albergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(coordinateCentro, coord, LengthUnit.KILOMETER));
+				tAlbergo a = new tAlbergo(rs.getInt("a.ID"), rs.getString("a.Denominazione"), rs.getString("a.Indirizzo"), rs.getDouble("a.Mezza_pensione_alta_stagione"), rs.getInt("a.Stelle"), rs.getInt("a.Cap"), rs.getString("a.Comune"), rs.getString("a.Provincia"), coord, rs.getInt("a.Bike_friendly"), rs.getString("a.Lingue"), rs.getInt("a.Disabili"), rs.getInt("a.Animali_domestici"), LatLngTool.distance(coordinateCentro, coord, LengthUnit.KILOMETER));
 				alberghi.add(a);
 			}
 

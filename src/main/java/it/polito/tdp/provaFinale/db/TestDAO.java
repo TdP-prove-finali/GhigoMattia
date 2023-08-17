@@ -2,7 +2,7 @@ package it.polito.tdp.provaFinale.db;
 
 import java.sql.Connection;
 import java.util.List;
-import it.polito.tdp.provaFinale.model.Albergo;
+import it.polito.tdp.provaFinale.model.tAlbergo;
 import it.polito.tdp.provaFinale.model.tAltro;
 import it.polito.tdp.provaFinale.model.tChiesa;
 import it.polito.tdp.provaFinale.model.Museo;
@@ -20,9 +20,9 @@ public class TestDAO {
 			
 			provaFinaleDAO dao = new provaFinaleDAO() ;
 			
-			List<Albergo> alberghi = dao.readAlberghi();
+			List<tAlbergo> alberghi = dao.readAlberghi();
 			alberghi.sort(null);
-			for(Albergo a : alberghi) {
+			for(tAlbergo a : alberghi) {
 				System.out.println(a+"\n");
 			}
 			System.out.println(alberghi.size());

@@ -14,7 +14,7 @@ public class TestModel {
 //		System.out.println(alberghi.size());
 		
 		m.creaListaAlberghi(100000.0, 0, 1000000.0, false, false, false);
-		Albergo a = m.getAlbergo(221);
+		tAlbergo a = m.getAlbergo(221);
 		m.setAlbergo(a);
 //		System.out.println(a);
 		

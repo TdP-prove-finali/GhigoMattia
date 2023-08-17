@@ -16,8 +16,8 @@ public class Model {
 	private provaFinaleDAO dao;
 	
 	private Graph<Luogo, DefaultWeightedEdge> grafo;
-	private List<Albergo> allAlberghi;
-	private List<Albergo> alberghiFiltrati;
+	private List<tAlbergo> allAlberghi;
+	private List<tAlbergo> alberghiFiltrati;
 	private List<Luogo> allLuoghi;
 	private List<Luogo> luoghiVicini; //escludo i luoghi troppo lontani dall'albergo
 	private List<tChiesa> allChiese;
@@ -37,7 +37,7 @@ public class Model {
 	
 	private LatLng coordinateCentro = new LatLng(45.07121307478032, 7.685087280059961); //coordinate centro di Torino, nello specifico si riferiscono al centro di Piazza Castello
 
-	private Albergo albergoScelto;
+	private tAlbergo albergoScelto;
 	private double tempoDisponibile;
 	private int stelleCulto;
 	private int stelleIntrattenimento;
@@ -95,14 +95,14 @@ public class Model {
 		if(bici==true) {
 			if(disabili==true) {
 				if(animali==true) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getDisabili()==disabili) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -111,14 +111,14 @@ public class Model {
 			}
 			if(disabili==false) {
 				if(animali==true) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getBici()==bici) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -129,14 +129,14 @@ public class Model {
 		if(bici==false) {
 			if(disabili==true) {
 				if(animali==true) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getDisabili()==disabili) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -145,14 +145,14 @@ public class Model {
 			}
 			if(disabili==false) {
 				if(animali==true) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza && a.getAnimali()==animali) {
 							this.alberghiFiltrati.add(a);
 						}
 					}
 				}
 				if(animali==false) {
-					for(Albergo a : this.allAlberghi) {
+					for(tAlbergo a : this.allAlberghi) {
 						if(a.getPrezzo()<=prezzo && a.getStelle()>=stelle && LatLngTool.distance(coordinateCentro, a.getCoordinate(), LengthUnit.KILOMETER)<=distanza) {
 							this.alberghiFiltrati.add(a);
 						}
@@ -162,7 +162,7 @@ public class Model {
 		}
 	}
 	
-	public void setAlbergo(Albergo albergo) {
+	public void setAlbergo(tAlbergo albergo) {
 		this.albergoScelto = albergo;
 		
 		double distanzaChiesa = Double.MAX_VALUE;
@@ -763,18 +763,18 @@ public class Model {
 		}
 	}
 	
-	public List<Albergo> getAllAlberghi() {
+	public List<tAlbergo> getAllAlberghi() {
 		this.allAlberghi.sort(null);
 		return allAlberghi;
 	}
 
-	public List<Albergo> getAlberghiFiltrati() {
+	public List<tAlbergo> getAlberghiFiltrati() {
 		this.alberghiFiltrati.sort(null);
 		return alberghiFiltrati;
 	}
 	
-	public Albergo getAlbergo(Integer i) {
-		for(Albergo a : this.allAlberghi) {
+	public tAlbergo getAlbergo(Integer i) {
+		for(tAlbergo a : this.allAlberghi) {
 			if(a.getId()==i) {
 				return a;
 			}
