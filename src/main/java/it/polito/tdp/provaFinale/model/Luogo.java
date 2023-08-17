@@ -25,10 +25,6 @@ public class Luogo {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getTipo() {
 		return tipo;
 	}
@@ -37,24 +33,12 @@ public class Luogo {
 		return indirizzo;
 	}
 
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-
 	public LatLng getCoordinate() {
 		return coordinate;
 	}
 
-	public void setCoordinate(LatLng coordinate) {
-		this.coordinate = coordinate;
-	}
-
 	public int getVisita() {
 		return visita;
-	}
-
-	public void setVisita(Integer visita) {
-		this.visita = visita;
 	}
 
 	@Override
