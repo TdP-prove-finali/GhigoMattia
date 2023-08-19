@@ -46,37 +46,30 @@ public class Model {
 	public Model() {
 		this.dao = new provaFinaleDAO();
 		
-		//aggiungo gli alberghi
 		this.allAlberghi = new ArrayList<>(dao.readAlberghi());
 		
-		//creao la lista contenente tutti i luoghi visitabili
 		this.allLuoghi = new ArrayList<>();
 		
-		//aggiungo le chiese
 		this.allChiese = new ArrayList<>(dao.readChiese());
 		for(Chiesa c : allChiese) {
 			this.allLuoghi.add(new Luogo(c.getNome(), c.getTipo(), c.getIndirizzo(), c.getCoordinate(), c.getVisita()));
 		}
 		
-		//aggiungo altri tipi di luoghi
 		this.allAltri = new ArrayList<>(dao.readAltriLuoghi());
 		for(Altro a : allAltri) {
 			this.allLuoghi.add(new Luogo(a.getNome(), a.getTipo(), a.getIndirizzo(), a.getCoordinate(), a.getVisita()));
 		}
 		
-		//aggiungo i musei
 		this.allMusei = new ArrayList<>(dao.readMusei());
 		for(Museo m : allMusei) {
 			this.allLuoghi.add(new Luogo(m.getNome(), m.getTipo(), m.getIndirizzo(), m.getCoordinate(), m.getVisita()));
 		}
 		
-		//aggiungo i teatri
 		this.allTeatri = new ArrayList<>(dao.readTeatri());
 		for(Teatro t : allTeatri) {
 			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
 		}
 		
-		//aggiungo i toret
 		this.allToretti = new ArrayList<>(dao.readToretti());
 		for(Toretto t : allToretti) {
 			this.allLuoghi.add(new Luogo(t.getNome(), t.getTipo(), t.getIndirizzo(), t.getCoordinate(), t.getVisita()));
@@ -84,7 +77,6 @@ public class Model {
 	}
 	
 	public void creaListaAlberghi(double prezzo, int stelle, double distanza, boolean bici, boolean disabili, boolean animali) {
-		//creo la lista contenente gli alberghi filtrati
 		this.alberghiFiltrati = new ArrayList<>();
 		
 		if(bici==true) {
@@ -234,12 +226,9 @@ public class Model {
 	public void creaGrafo(int stelleIntrattenimento, int stelleCulto, int stelleMusei) {
 		this.grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 
-		//creo la lista contente i luoghi vicini all'albergo
 		this.luoghiVicini = new ArrayList<>();
 		for(Luogo l : this.allLuoghi) {
-			//parchi, toret e locali non vengono aggiunti al grafo
 			if(l.getTipo().compareTo("Parco")!=0 && l.getTipo().compareTo("Toret")!=0 && l.getTipo().compareTo("Locale storico")!=0) {
-				//luoghi aggiunti in modo diverso in base alla distanza dell'albergo dal centro
 				if(LatLngTool.distance(coordinateCentro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)<=0.5) {
 					if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=0.4 && l.getTipo().compareTo("Chiesa")!=0 && l.getTipo().compareTo("Cinema")!=0 && l.getTipo().compareTo("Teatro")!=0 && l.getTipo().compareTo("Museo")!=0) {
 						this.luoghiVicini.add(l);
@@ -322,27 +311,22 @@ public class Model {
 			}
 		}
 		
-		//aggiungo, al grafo, l'albergo come punto di partenza e di arrivo
 		Luogo partenza = new Luogo(this.albergoScelto.getNome(), "PARTENZA", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
 		Luogo arrivo = new Luogo(this.albergoScelto.getNome(), "ARRIVO", this.albergoScelto.getIndirizzo(), this.albergoScelto.getCoordinate(), 0);
 		this.luoghiVicini.add(partenza);
 		this.luoghiVicini.add(arrivo);
 		
-		//aggiungo i vertici al grafo
 		Graphs.addAllVertices(this.grafo, this.luoghiVicini);
 
-		//aggiungo gli archi al grafo
 		for(Luogo l1 : this.grafo.vertexSet()) {
 			for(Luogo l2 : this.grafo.vertexSet()) {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
-					//non vengono collegati luoghi simili o troppo lontani
 					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0 || l1.getTipo().compareTo("Cinema")==0)) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>3) {
 						controllo = true;
 					}
 					if(controllo==false) {
 						double distanza = LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER);
-						//la velocità di spostamento da un luogo ad un altro dipende dalla distanza, lo spostamento potrà avvenire a piedi oppure con mezzi pubblici
 						if(distanza<=1.5) {
 							Graphs.addEdgeWithVertices(this.grafo, l1, l2, LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)*60/4);
 						}
@@ -737,7 +721,6 @@ public class Model {
 		return adiacenti;
 	}
 	
-	
 	public List<Luogo> getItinerarioMigliore() {
 		return itinerarioMigliore;
 	}
@@ -810,6 +793,4 @@ public class Model {
 	public Toretto getToret() {
 		return this.toretVicino;
 	}
-	
-	
 }
