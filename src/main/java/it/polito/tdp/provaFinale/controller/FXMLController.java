@@ -105,7 +105,7 @@ public class FXMLController {
     		this.gridFiltriLuoghi.setDisable(false);
     		this.btnCalcolaItinerario.setDisable(false);
     		this.model.setAlbergo(a);
-    		this.txtArea.setText("Impostare i filtri richiesti per le tipologie di luoghi specificate e premere 'Calcola itinerario'. Nell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
+    		this.txtArea.setText("Impostare i filtri richiesti per le tipologie di luoghi specificate e premere 'Calcola itinerario'.\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     	}
     	else {
     		this.txtArea.setText("Selezionare un albergo");
@@ -195,7 +195,7 @@ public class FXMLController {
     @FXML
     void handleBtnCalcolaItinerario(ActionEvent event) {
     	if(this.cmbTempo.getValue()==null || this.cmbIntrattenimento.getValue()==null || this.cmbCulto.getValue()==null || this.cmbMusei.getValue()==null) {
-    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi e premere 'Calcola itinerario'. Nell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
+    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi e premere 'Calcola itinerario'.\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     		return;
     	}
     	this.txtArea.clear();
