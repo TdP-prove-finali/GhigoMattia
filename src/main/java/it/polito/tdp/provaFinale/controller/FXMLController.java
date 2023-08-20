@@ -105,9 +105,10 @@ public class FXMLController {
     		this.gridFiltriLuoghi.setDisable(false);
     		this.btnCalcolaItinerario.setDisable(false);
     		this.model.setAlbergo(a);
+    		this.txtArea.setText("Impostare i filtri richiesti per le tipologie di luoghi specificate e premere 'Calcola itinerario'. Nell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     	}
     	else {
-    		this.txtArea.setText("Selezionare un albergo!");
+    		this.txtArea.setText("Selezionare un albergo");
     	}
     }
     
@@ -186,15 +187,22 @@ public class FXMLController {
     	for(double i=1;i<=8;i++) {
     		this.cmbDistanza.getItems().add(i+" km");
     	}
+    	this.checkAnimali.setSelected(false);
+    	this.checkBici.setSelected(false);
+    	this.checkDisabili.setSelected(false);
     }
     
     @FXML
     void handleBtnCalcolaItinerario(ActionEvent event) {
     	if(this.cmbTempo.getValue()==null || this.cmbIntrattenimento.getValue()==null || this.cmbCulto.getValue()==null || this.cmbMusei.getValue()==null) {
-    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi");
+    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi e premere 'Calcola itinerario'. Nell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     		return;
     	}
     	this.txtArea.clear();
+    	this.txtArea.setText("Albergo selezionato: "+this.cmbHotel.getValue().getNome()+"\n");
+    	this.txtArea.appendText("Indirizzo: "+this.cmbHotel.getValue().getIndirizzo()+"\n");
+    	this.txtArea.appendText("Prezzo a notte: "+this.cmbHotel.getValue().getPrezzo()+"\n");
+    	this.txtArea.appendText("Distanza dal centro: " + Math.round(this.cmbHotel.getValue().getDistanzaCentro()*100.0)/100.0 + " km\n");
     	int indice = this.cmbTempo.getValue().indexOf(" ");
     	double tempo = Double.parseDouble(this.cmbTempo.getValue().substring(0, indice));
     	int intrattenimento = 0;
@@ -227,18 +235,18 @@ public class FXMLController {
     	else if(this.cmbMusei.getValue().compareTo("Molto interessato")==0) {
     		musei=3;
     	}
-    	double tic = System.currentTimeMillis();
+    	long tic = System.currentTimeMillis();
     	model.creaItinerario(tempo*60, intrattenimento, culto, musei);
-    	double toc = System.currentTimeMillis();
+    	long toc = System.currentTimeMillis();
     	List<Luogo> itinerarioTop = new ArrayList<>(model.getItinerarioMiglioreFiltrato());
     	List<Luogo> itinerario = new ArrayList<>(model.getItinerarioMigliore());
     	boolean controllo = false;
     	if(itinerarioTop.size()==0) {
-    		this.txtArea.setText("Non è stato possibile creare un itineario che rispetti i filtri inseriti, modificarli e riprovare\n");
+    		this.txtArea.appendText("\nNon è stato possibile creare un itineario che rispetti i filtri inseriti, modificarli e riprovare\n");
     		controllo=true;
     	}
     	else if(itinerarioTop.size()>0) {
-        	this.txtArea.setText("Itinerario creato:\n");
+        	this.txtArea.appendText("\nItinerario creato:\n");
         	for(int i=1;i<itinerarioTop.size()-1;i++) {
         		this.txtArea.appendText(itinerarioTop.get(i)+"\n");
         		if(itinerarioTop.get(i).getNome().compareTo(itinerario.get(i).getNome())!=0) {
@@ -299,7 +307,7 @@ public class FXMLController {
     	this.txtArea.appendText("\nLocale storico nelle vicinanze: "+model.getLocale());
     	this.txtArea.appendText("\nParco nelle vicinanze: "+model.getParco());
     	this.txtArea.appendText("\nToret, simbolo di Torino, nelle vicinanze: "+model.getToret());
-    	this.txtArea.appendText("\n\nTempo impiegato per il calcolo del percorso: "+((toc-tic)/1000)+" secondi");
+    	this.txtArea.appendText("\n\nTempo per il calcolo: "+(toc-tic));
     }
 
     @FXML
@@ -350,7 +358,7 @@ public class FXMLController {
     	this.cmbHotel.getItems().addAll(model.getAllAlberghi());
     	this.txtArea.clear();
     	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati\n");
-    	this.txtArea.appendText("Selezionare un hotel");
+    	this.txtArea.appendText("Selezionare un albergo");
     	for(double i=50;i<=250;i+=50) {
     		this.cmbPrezzo.getItems().add(i+" €");
     	}

@@ -80,6 +80,12 @@ public class Albergo implements Comparable<Albergo>{
 	public boolean getAnimali() {
 		return animali;
 	}
+	
+	
+
+	public double getDistanzaCentro() {
+		return distanzaCentro;
+	}
 
 	@Override
 	public int hashCode() {

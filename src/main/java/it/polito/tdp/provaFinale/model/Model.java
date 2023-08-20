@@ -266,7 +266,7 @@ public class Model {
 						}
 					}
 				}
-				else if(LatLngTool.distance(coordinateCentro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)>0.5 && LatLngTool.distance(coordinateCentro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)<=6) {
+				else if(LatLngTool.distance(coordinateCentro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)>0.5 && LatLngTool.distance(coordinateCentro, albergoScelto.getCoordinate(), LengthUnit.KILOMETER)<=5) {
 					if(LatLngTool.distance(albergoScelto.getCoordinate(), l.getCoordinate(), LengthUnit.KILOMETER)<=2 && l.getTipo().compareTo("Chiesa")!=0 && l.getTipo().compareTo("Cinema")!=0 && l.getTipo().compareTo("Teatro")!=0 && l.getTipo().compareTo("Museo")!=0) {
 						this.luoghiVicini.add(l);
 					}
@@ -322,7 +322,7 @@ public class Model {
 			for(Luogo l2 : this.grafo.vertexSet()) {
 				if(!l1.equals(l2)) {
 					Boolean controllo = false;
-					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0 || l1.getTipo().compareTo("Cinema")==0)) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>3) {
+					if((l1.getTipo().compareTo(l2.getTipo())==0 && (l1.getTipo().compareTo("Museo")==0 || l1.getTipo().compareTo("Teatro")==0 || l1.getTipo().compareTo("Cinema")==0 || l1.getTipo().compareTo("Piazza")==0)) || LatLngTool.distance(l1.getCoordinate(), l2.getCoordinate(), LengthUnit.KILOMETER)>3) {
 						controllo = true;
 					}
 					if(controllo==false) {
@@ -336,7 +336,8 @@ public class Model {
 					}
 				}
 			}
-		}		
+		}
+		System.out.println("Grafo creato con "+this.grafo.vertexSet().size()+" e "+this.grafo.edgeSet().size()+" archi");
 	}
 	
 	public void creaItinerario(double tempoDisponibile, int stelleIntrattenimento, int stelleCulto, int stelleMusei) {
