@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `altriluoghi` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.altriluoghi: ~176 rows (circa)
+-- Dump dei dati della tabella provafinale.altriluoghi: ~175 rows (circa)
 DELETE FROM `altriluoghi`;
 INSERT INTO `altriluoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(2, 'Locale storico', 'Confetteria Stratta', '45.0674347', '7.6829804', 'Piazza San Carlo 191', 20),
@@ -329,7 +329,6 @@ INSERT INTO `altriluoghi` (`ID`, `Tipo`, `Nome`, `Latitudine`, `Longitudine`, `I
 	(96, 'Monumento', 'Monumento a Giulio Cesare', '45.0749197', '7.6847148', 'Piazza Cesare Augusto 15', 5),
 	(97, 'Monumento', 'Monumento all\'Alfiere dell\'Esercito Sardo', '45.0711920', '7.6852606', 'Piazza Castello', 5),
 	(98, 'Monumento', 'Monumento a Giovanni Battista Bottero', '45.07357250810432', '7.68288890800048', 'Via Torquato Tasso', 5),
-	(99, 'Monumento', 'Arco Monumentale all\'Arma di Artiglieria', '45.05835466057238', '7.690600369285273', 'Viale Virgilio', 5),
 	(100, 'Monumento', 'Monumento a Camillo Benso', '45.06631901180995', '7.688933872231396', 'Piazza Carlo Emanuele II', 5),
 	(101, 'Monumento', 'Monumento a San Giovanni Bosco', '45.08057142609676', '7.675608260089778', 'Via Maria Ausiliatrice, 15', 5),
 	(102, 'Monumento', 'Monumento al Conte Verde', '45.07304438492566', '7.681347724949065', 'Piazza Palazzo di Città', 5),
@@ -614,7 +613,7 @@ CREATE TABLE IF NOT EXISTS `musei` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dump dei dati della tabella provafinale.musei: ~45 rows (circa)
+-- Dump dei dati della tabella provafinale.musei: ~43 rows (circa)
 DELETE FROM `musei`;
 INSERT INTO `musei` (`ID`, `Nome`, `Latitudine`, `Longitudine`, `Indirizzo`, `Durata`) VALUES
 	(26, 'Museo Lavazza', '45.080978', '7.6925657', 'Via Bologna 32', 90),
