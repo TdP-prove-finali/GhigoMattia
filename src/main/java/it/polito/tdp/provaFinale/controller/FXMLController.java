@@ -105,7 +105,7 @@ public class FXMLController {
     		this.gridFiltriLuoghi.setDisable(false);
     		this.btnCalcolaItinerario.setDisable(false);
     		this.model.setAlbergo(a);
-    		this.txtArea.setText("Impostare i filtri richiesti per le tipologie di luoghi specificate e premere 'Calcola itinerario'.\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
+    		this.txtArea.setText("Impostare i filtri richiesti per le tipologie di luoghi specificate e premere 'Calcola itinerario'\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     	}
     	else {
     		this.txtArea.setText("Selezionare un albergo");
@@ -159,13 +159,13 @@ public class FXMLController {
         	else {
         		this.cmbHotel.getItems().addAll();
         		this.txtArea.setText(model.getAlberghiFiltrati().size()+" alberghi trovati\n");
-        		this.txtArea.appendText("Selezionare un hotel");
+        		this.txtArea.appendText("Selezionare un albergo");
         	}
     	}
     	else {
         	this.txtArea.clear();
         	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati\n");
-        	this.txtArea.appendText("Selezionare un hotel");
+        	this.txtArea.appendText("Selezionare un albergo");
     	}
     }
     
@@ -174,7 +174,8 @@ public class FXMLController {
     	this.txtArea.clear();
     	this.cmbHotel.getItems().clear();
     	this.cmbHotel.getItems().addAll(model.getAllAlberghi());
-    	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati");
+    	this.txtArea.setText(model.getAllAlberghi().size()+" alberghi trovati\n");
+    	this.txtArea.appendText("Selezionare un albergo");
     	this.cmbPrezzo.getItems().clear();
     	for(double i=50;i<=250;i+=50) {
     		this.cmbPrezzo.getItems().add(i+" €");
@@ -195,13 +196,14 @@ public class FXMLController {
     @FXML
     void handleBtnCalcolaItinerario(ActionEvent event) {
     	if(this.cmbTempo.getValue()==null || this.cmbIntrattenimento.getValue()==null || this.cmbCulto.getValue()==null || this.cmbMusei.getValue()==null) {
-    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi e premere 'Calcola itinerario'.\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
+    		this.txtArea.setText("Impostare i filtri richiesti per i luoghi e premere 'Calcola itinerario'\nNell'itinerario saranno presenti anche altri luoghi, come ad esempio: locali storici, fontane, monumenti, piazze e molto altro");
     		return;
     	}
     	this.txtArea.clear();
     	this.txtArea.setText("Albergo selezionato: "+this.cmbHotel.getValue().getNome()+"\n");
     	this.txtArea.appendText("Indirizzo: "+this.cmbHotel.getValue().getIndirizzo()+"\n");
-    	this.txtArea.appendText("Prezzo a notte: "+this.cmbHotel.getValue().getPrezzo()+"\n");
+    	this.txtArea.appendText("Prezzo a notte: "+this.cmbHotel.getValue().getPrezzo()+" €"+"\n");
+    	this.txtArea.appendText("Numero di stelle: "+this.cmbHotel.getValue().getStelle()+"\n");
     	this.txtArea.appendText("Distanza dal centro: " + Math.round(this.cmbHotel.getValue().getDistanzaCentro()*100.0)/100.0 + " km\n");
     	int indice = this.cmbTempo.getValue().indexOf(" ");
     	double tempo = Double.parseDouble(this.cmbTempo.getValue().substring(0, indice));
@@ -235,9 +237,9 @@ public class FXMLController {
     	else if(this.cmbMusei.getValue().compareTo("Molto interessato")==0) {
     		musei=3;
     	}
-    	long tic = System.currentTimeMillis();
+//    	long tic = System.currentTimeMillis();
     	model.creaItinerario(tempo*60, intrattenimento, culto, musei);
-    	long toc = System.currentTimeMillis();
+//    	long toc = System.currentTimeMillis();
     	List<Luogo> itinerarioTop = new ArrayList<>(model.getItinerarioMiglioreFiltrato());
     	List<Luogo> itinerario = new ArrayList<>(model.getItinerarioMigliore());
     	boolean controllo = false;
@@ -307,7 +309,7 @@ public class FXMLController {
     	this.txtArea.appendText("\nLocale storico nelle vicinanze: "+model.getLocale());
     	this.txtArea.appendText("\nParco nelle vicinanze: "+model.getParco());
     	this.txtArea.appendText("\nToret, simbolo di Torino, nelle vicinanze: "+model.getToret());
-    	this.txtArea.appendText("\n\nTempo per il calcolo: "+(toc-tic));
+//    	this.txtArea.appendText("\n\nTempo per il calcolo: "+(toc-tic));
     }
 
     @FXML
